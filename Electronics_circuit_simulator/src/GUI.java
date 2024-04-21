@@ -200,8 +200,6 @@ public class GUI {
         panel.add(textField);
         components.add(label);
         components.add(textField);
-       // panel.revalidate();
-        //panel.repaint();
     }
     
     // Phần 2: Phương thức submitCircuit và phương thức vẽ mạch
