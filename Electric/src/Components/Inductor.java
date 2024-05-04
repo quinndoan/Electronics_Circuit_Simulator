@@ -1,4 +1,4 @@
-package application.Components;
+package Components;
 
 public class Inductor extends element{
 
