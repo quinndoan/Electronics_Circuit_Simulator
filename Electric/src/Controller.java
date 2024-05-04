@@ -7,13 +7,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 
 public class Controller implements Initializable {
     private int soluong = 0;
@@ -21,17 +30,21 @@ public class Controller implements Initializable {
     private int C = 0;
     private int L = 0;
     private EleController eleController;
+    @FXML
+    Canvas canvas = new Canvas(600, 400);
+    @FXML
+    GraphicsContext gc = canvas.getGraphicsContext2D();
 
     @FXML
     private GridPane grid1;
     @FXML
-    public GridPane grid2;
+    private GridPane grid2;
     @FXML
-    public GridPane grid3;
-
+    private GridPane grid3;
     @FXML
     public Label label;
-
+    @FXML
+    private StackPane circuit;
     ObservableList<String> list1 = FXCollections.observableArrayList("Ω", "kΩ", "MΩ");
     ObservableList<String> list2 = FXCollections.observableArrayList("H", "kH", "MH");
     ObservableList<String> list3 = FXCollections.observableArrayList("F", "kF", "MF");
@@ -137,5 +150,53 @@ public class Controller implements Initializable {
 
         // Cài đặt ràng buộc cột để TextArea và Label chiếm toàn bộ chiều rộng
 
+    }
+
+    public void circuitGenerate(ActionEvent event) {
+        Canvas canvas = new Canvas(600, 400);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        drawCircuitDiagram(gc);
+
+        circuit.getChildren().add(canvas);
+
+    }
+
+    private void drawCircuitDiagram(GraphicsContext gc) {
+        // Draw circuit components
+        drawResistor(gc, 100, 150);
+        drawResistor(gc, 250, 150);
+        drawResistor(gc, 400, 150);
+
+        // Draw connections
+        drawConnection(gc, 50, 150, 550, 150);
+        drawConnection(gc, 50, 250, 550, 250);
+
+        // Draw voltage source
+        drawVoltageSource(gc, 50, 200);
+    }
+
+    private void drawResistor(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeLine(x, y, x + 50, y);
+        gc.strokeLine(x + 50, y, x + 60, y - 10);
+        gc.strokeLine(x + 60, y - 10, x + 70, y + 10);
+        gc.strokeLine(x + 70, y + 10, x + 80, y - 10);
+        gc.strokeLine(x + 80, y - 10, x + 90, y + 10);
+        gc.strokeLine(x + 90, y + 10, x + 100, y);
+    }
+
+    private void drawConnection(GraphicsContext gc, double startX, double startY, double endX, double endY) {
+        gc.setStroke(Color.BLACK);
+        gc.setLineWidth(2);
+        gc.strokeLine(startX, startY, endX, endY);
+    }
+
+    private void drawVoltageSource(GraphicsContext gc, double x, double y) {
+        gc.setStroke(Color.RED);
+        gc.setLineWidth(2);
+        gc.strokeRect(x, y - 20, 20, 40); // Draw rectangle representing the battery
+        gc.strokeLine(x + 20, y, x + 30, y); // Draw positive terminal line
+        gc.strokeLine(x, y, x - 10, y); // Draw negative terminal line
     }
 }

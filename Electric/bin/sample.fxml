@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.canvas.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
@@ -10,7 +12,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="985.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <MenuBar>
+      <MenuBar stylesheets="@style.css">
         <menus>
           <Menu mnemonicParsing="false" text="Parallel Circuit">
             <items>
@@ -27,13 +29,16 @@
             <Insets />
          </opaqueInsets>
       </MenuBar>
-      <HBox layoutX="108.0" layoutY="65.0" prefHeight="311.0" prefWidth="728.0">
+      <HBox layoutX="108.0" layoutY="65.0" prefHeight="215.0" prefWidth="728.0">
          <children>
             <VBox prefHeight="311.0" prefWidth="232.0">
                <children>
-                  <HBox prefHeight="47.0" prefWidth="195.0">
+                  <HBox prefHeight="47.0" prefWidth="195.0" styleClass="hbox1" stylesheets="@style.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#addResistor" text="Add Resistor" />
+                        <Button mnemonicParsing="false" onAction="#addResistor" styleClass="button1" stylesheets="@style.css" text="Add Resistor">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                   <GridPane fx:id="grid1" prefHeight="126.0" prefWidth="195.0">
@@ -53,9 +58,12 @@
             </VBox>
             <VBox prefHeight="311.0" prefWidth="241.0">
                <children>
-                  <HBox prefHeight="47.0" prefWidth="195.0">
+                  <HBox prefHeight="47.0" prefWidth="195.0" styleClass="hbox1" stylesheets="@style.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#addInductor" text="Add Inductor " />
+                        <Button mnemonicParsing="false" onAction="#addInductor" styleClass="button1" stylesheets="@style.css" text="Add Inductor ">
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font></Button>
                      </children>
                   </HBox>
                   <GridPane fx:id="grid2" prefHeight="120.0" prefWidth="228.0">
@@ -75,12 +83,15 @@
             </VBox>
             <VBox prefHeight="311.0" prefWidth="222.0">
                <children>
-                  <HBox prefHeight="48.0" prefWidth="222.0">
+                  <HBox prefHeight="48.0" prefWidth="222.0" styleClass="hbox1" stylesheets="@style.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#addCapacitor" text="Add Capacitor">
+                        <Button mnemonicParsing="false" onAction="#addCapacitor" styleClass="button1" stylesheets="@style.css" text="Add Capacitor">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
+                           <font>
+                              <Font name="Arial Bold" size="15.0" />
+                           </font>
                         </Button>
                      </children>
                   </HBox>
@@ -101,5 +112,11 @@
             </VBox>
          </children>
       </HBox>
+      <ScrollPane layoutX="87.0" layoutY="339.0" prefHeight="308.0" prefWidth="367.0">
+         <content>
+            <StackPane fx:id="circuit" prefHeight="150.0" prefWidth="200.0" />
+         </content>
+      </ScrollPane>
+      <Button layoutX="414.0" layoutY="280.0" mnemonicParsing="false" onAction="#circuitGenerate" text="Generate" />
    </children>
 </AnchorPane>
