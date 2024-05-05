@@ -4,6 +4,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
 public class ParalleCircuitDrawer extends Application {
@@ -53,7 +54,7 @@ public class ParalleCircuitDrawer extends Application {
         drawCapacitor(gc, x+320, y);
         drawParallelLine(gc, x+320, y);
 
-        drawResistor(gc, x+400, y);
+        drawInductor(gc, x+400, y);
         
         //gc.strokeLine(0, 0, 640, 240);
     }
@@ -92,6 +93,21 @@ public class ParalleCircuitDrawer extends Application {
         gc.strokeLine(x-10, y+55, x+10, y+55);
         gc.strokeLine(x-10, y+65, x+10, y+65);
         gc.strokeLine(x, y+65, x, y+80);
+
+        //duong day tren
+        gc.strokeLine(x, y, x, y+40);
+        
+        //duong day duoi
+        gc.strokeLine(x, y+80, x, y+120);
+    }
+
+    private void drawInductor(GraphicsContext gc, double x, double y) {
+
+        //inductor
+        gc.strokeArc(x-20, y+40, 38, 14, 180+40, 180+50, ArcType.OPEN );
+        gc.strokeArc(x-20, y+49, 38, 14, 180+40, 180+100, ArcType.OPEN );
+        gc.strokeArc(x-20, y+58, 38, 14, 180+40, 180+100, ArcType.OPEN );
+        gc.strokeArc(x-20, y+67, 38, 12, 180+90, 180+50, ArcType.OPEN );
 
         //duong day tren
         gc.strokeLine(x, y, x, y+40);
