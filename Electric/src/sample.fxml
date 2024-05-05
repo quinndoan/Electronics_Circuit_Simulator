@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1154.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1154.0" styleClass="label" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <MenuBar stylesheets="@style.css">
         <menus>
@@ -21,7 +21,7 @@
             <Insets />
          </opaqueInsets>
       </MenuBar>
-      <HBox layoutX="339.0" layoutY="90.0" prefHeight="215.0" prefWidth="728.0">
+      <HBox layoutX="365.0" layoutY="98.0" prefHeight="215.0" prefWidth="728.0">
          <children>
             <VBox prefHeight="215.0" prefWidth="244.0">
                <children>
@@ -109,14 +109,37 @@
             <StackPane fx:id="circuit" prefHeight="150.0" prefWidth="200.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="502.0" layoutY="350.0" mnemonicParsing="false" onAction="#circuitGenerate" styleClass="button2" stylesheets="@style.css" text="Generate">
+      <Button layoutX="385.0" layoutY="350.0" mnemonicParsing="false" onAction="#circuitGenerate" styleClass="button2" stylesheets="@style.css" text="Generate">
          <font>
             <Font name="Arial Bold" size="18.0" />
          </font></Button>
-      <VBox layoutX="95.0" layoutY="98.0" prefHeight="200.0" prefWidth="169.0">
+      <VBox fx:id="vbox2" layoutX="71.0" layoutY="98.0" prefHeight="200.0" prefWidth="207.0">
          <children>
-            <ComboBox fx:id="comboBoxVol" prefHeight="31.0" prefWidth="166.0" promptText="Choose Voltage" styleClass="combobox2" stylesheets="@style.css" />
+            <HBox prefHeight="45.0" prefWidth="169.0" styleClass="hbox1" stylesheets="@style.css">
+               <children>
+                  <ComboBox fx:id="comboBoxVol" onAction="#handleComboBoxAction" prefHeight="31.0" prefWidth="166.0" promptText="Choose Voltage" styleClass="combobox2" stylesheets="@style.css" />
+               </children>
+            </HBox>
+            <HBox prefHeight="45.0" prefWidth="169.0">
+               <children>
+                  <Label fx:id="name1" prefHeight="21.0" prefWidth="26.0" text="U" />
+                  <TextField fx:id="textField1" prefHeight="31.0" prefWidth="149.0" />
+                  <Label fx:id="unit1" prefHeight="30.0" prefWidth="30.0" stylesheets="@style.css" text="V" textAlignment="RIGHT" />
+               </children>
+            </HBox>
+            <HBox prefHeight="43.0" prefWidth="194.0">
+               <children>
+                  <Label fx:id="name2" prefHeight="21.0" prefWidth="25.0" stylesheets="@style.css" text="f" />
+                  <TextField fx:id="textField2" prefHeight="31.0" prefWidth="152.0" />
+                  <Label fx:id="unit2" prefHeight="28.0" prefWidth="31.0" stylesheets="@style.css" text="Hz" />
+               </children>
+            </HBox>
          </children>
       </VBox>
+      <Button fx:id="resetButton" layoutX="676.0" layoutY="350.0" mnemonicParsing="false" onAction="#resettoInitialize" styleClass="button2" stylesheets="@style.css" text="Reset">
+         <font>
+            <Font name="Arial Bold" size="18.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
