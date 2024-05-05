@@ -138,4 +138,5 @@ public class Controller implements Initializable {
         // Cài đặt ràng buộc cột để TextArea và Label chiếm toàn bộ chiều rộng
 
     }
+    
 }
