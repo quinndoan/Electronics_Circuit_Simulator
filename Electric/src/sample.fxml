@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="829.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ParalleCircuitDrawer">
    <children>
       <MenuBar>
         <menus>
@@ -101,5 +101,7 @@
             </VBox>
          </children>
       </HBox>
+      <Button layoutX="301.0" layoutY="369.0" mnemonicParsing="false" onAction="#GenerateCircuit" prefHeight="48.0" prefWidth="143.0" text="Generate Circuit" />
+      <StackPane fx:id="root" layoutX="75.0" layoutY="460.0" prefHeight="181.0" prefWidth="299.0" />
    </children>
 </AnchorPane>

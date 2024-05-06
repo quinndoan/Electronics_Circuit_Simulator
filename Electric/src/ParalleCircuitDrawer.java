@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -7,10 +9,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
-public class ParalleCircuitDrawer extends Application {
+public class ParalleCircuitDrawer {
 
-    @Override
-    public void start(Stage primaryStage) {
+    private Stage stage;
+
+    @FXML
+    StackPane root = new StackPane();
+    @FXML
+    public void GenerateCircuit(ActionEvent event) {
         // Create a canvas
         Canvas canvas = new Canvas(640, 240);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -21,9 +27,9 @@ public class ParalleCircuitDrawer extends Application {
         StackPane root = new StackPane();
         root.getChildren().add(canvas);
 
-        primaryStage.setScene(new Scene(root, 640, 240));
-        primaryStage.setTitle("Parallel Circuit");
-        primaryStage.show();
+        stage.setScene(new Scene(root, 640, 240));
+        stage.setTitle("Parallel Circuit");
+        stage.show();
     }
 
     private void drawCircuitDiagram(GraphicsContext gc) {
@@ -139,7 +145,4 @@ public class ParalleCircuitDrawer extends Application {
         gc.strokeLine(x, y+120, x+80, y+120);
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

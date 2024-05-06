@@ -1,6 +1,10 @@
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.text.html.parser.Element;
+
 import Components.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,14 +18,14 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Controller implements Initializable {
     private int soluong = 0;
     private int R = 0;
     private int C = 0;
     private int L = 0;
-    private EleController eleController;
-
+    private ArrayList<String> ElementList = new ArrayList<String>();
     @FXML
     private GridPane grid1;
     @FXML
@@ -53,6 +57,7 @@ public class Controller implements Initializable {
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("R" + slString);
+        ElementList.add("R");
         // int row = findEmptyRow(grid1);
         // int column = 0; // Cột luôn là 0 trong trường hợp này
 
@@ -85,6 +90,7 @@ public class Controller implements Initializable {
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("L" + slString);
+        ElementList.add("L");
         // int row = findEmptyRow(grid1);
         // int column = 0; // Cột luôn là 0 trong trường hợp này
 
@@ -117,6 +123,7 @@ public class Controller implements Initializable {
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("C" + slString);
+        ElementList.add("C");
         // int row = findEmptyRow(grid1);
         // int column = 0; // Cột luôn là 0 trong trường hợp này
 
@@ -138,5 +145,6 @@ public class Controller implements Initializable {
         // Cài đặt ràng buộc cột để TextArea và Label chiếm toàn bộ chiều rộng
 
     }
-    
+
+
 }

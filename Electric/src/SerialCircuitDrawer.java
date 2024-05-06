@@ -1,13 +1,19 @@
+import Components.element;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.ArcType;
 import javafx.stage.Stage;
 
-public class ParalleCircuitDrawer extends Application {
+public class SerialCircuitDrawer extends Application {
 
+    int ElementDistance = 50;
+    int ResitorLength=40;
+    int inductorLength=40;
+    int CapacitorLength=10;
     @Override
     public void start(Stage primaryStage) {
         // Create a canvas
@@ -21,7 +27,7 @@ public class ParalleCircuitDrawer extends Application {
         root.getChildren().add(canvas);
 
         primaryStage.setScene(new Scene(root, 640, 240));
-        primaryStage.setTitle("Parallel Circuit");
+        primaryStage.setTitle("Serial Circuit");
         primaryStage.show();
     }
 
@@ -36,24 +42,18 @@ public class ParalleCircuitDrawer extends Application {
         //drawConnection(gc, 50, 250, 550, 250);
 
         // Draw voltage source
-        int x = 120;
-        int y = 60;
+        int x = 60;
+        int y = 180;
         drawVoltageSource(gc, x, y);
-        drawParallelLine(gc, x, y);
 
-        drawResistor(gc, x+80, y);
-        drawParallelLine(gc, x+80, y);
+        x=60;y=60;
+        drawResistor(gc, x, y);
+        drawLine(gc, x+=ResitorLength, y);
 
-        drawCapacitor(gc, x+160, y);
-        drawParallelLine(gc, x+160, y);
+        drawCapacitor(gc, x+=ElementDistance, y);
+        drawLine(gc, x+=CapacitorLength, y);
 
-        drawResistor(gc, x+240, y);
-        drawParallelLine(gc, x+240, y);
-
-        drawCapacitor(gc, x+320, y);
-        drawParallelLine(gc, x+320, y);
-
-        drawResistor(gc, x+400, y);
+        drawInductor(gc, x+=ElementDistance, y);
         
         //gc.strokeLine(0, 0, 640, 240);
     }
@@ -70,57 +70,64 @@ public class ParalleCircuitDrawer extends Application {
         //gc.strokeLine(x + 90, y + 10, x + 100, y);
 
         //resitor
-        gc.strokeLine(x, y+40, x+10, y+46);
-        gc.strokeLine(x+10, y+45, x-10, y+53);
-        gc.strokeLine(x-10, y+53, x+10, y+60);
-        gc.strokeLine(x+10, y+60, x-10, y+67);
-        gc.strokeLine(x-10, y+67, x+10, y+74);
-        gc.strokeLine(x+10, y+74, x, y+80);
+        gc.strokeLine(x, y, x+6, y-10);
+        gc.strokeLine(x+6, y-10, x+13, y+10);
+        gc.strokeLine(x+13, y+10, x+20, y-10);
+        gc.strokeLine(x+20, y-10, x+27, y+10);
+        gc.strokeLine(x+27, y+10, x+34, y-10);
+        gc.strokeLine(x+34, y-10, x+40, y);
 
         //duong day tren
-        gc.strokeLine(x, y, x, y+40);
         
         //duong day duoi
-        gc.strokeLine(x, y+80, x, y+120);
         
     }
 
     private void drawCapacitor(GraphicsContext gc, double x, double y) {
 
         //capacitor
-        gc.strokeLine(x, y+40, x, y+55);
-        gc.strokeLine(x-10, y+55, x+10, y+55);
-        gc.strokeLine(x-10, y+65, x+10, y+65);
-        gc.strokeLine(x, y+65, x, y+80);
+        gc.strokeLine(x, y-10, x, y+10);
+        gc.strokeLine(x+10, y-10, x+10, y+10);
+   
 
         //duong day tren
-        gc.strokeLine(x, y, x, y+40);
         
         //duong day duoi
-        gc.strokeLine(x, y+80, x, y+120);
+    }
+
+    private void drawInductor(GraphicsContext gc, double x, double y) {
+
+        //inductor
+        gc.strokeArc(x, y-20, 14, 38, 180+40+90, 180+50, ArcType.OPEN );
+        gc.strokeArc(x+9, y-20, 14, 38, 180+40+90, 180+100, ArcType.OPEN );
+        gc.strokeArc(x+18, y-20, 14, 38, 180+40+90, 180+100, ArcType.OPEN );
+        gc.strokeArc(x+27, y-20, 12, 38, 180+90+90, 180+50, ArcType.OPEN );
+
+        //duong day tren
+        
+        //duong day duoi
     }
 
     private void drawVoltageSource(GraphicsContext gc, double x, double y) {
-        gc.strokeOval(x-20,y+40,40,40);
+        gc.strokeOval(x,y-20,40,40);
 
         //dau cong
-        gc.strokeLine(x, y+50, x, y+60);
-        gc.strokeLine(x-5, y+55, x+5, y+55);
+        gc.strokeLine(x+5, y, x+15, y);
+        gc.strokeLine(x+10, y-5, x+10, y+5);
 
         //dau tru
-        gc.strokeLine(x-5, y+70, x+5, y+70);
+        gc.strokeLine(x+25, y, x+35, y);
 
         //duong day tren
-        gc.strokeLine(x, y, x, y+40);
+        
         
         //duong day duoi
-        gc.strokeLine(x, y+80, x, y+120);
+        
         
     }
 
-    private void drawParallelLine(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(x, y, x+80, y);
-        gc.strokeLine(x, y+120, x+80, y+120);
+    private void drawLine(GraphicsContext gc, double x, double y) {
+        gc.strokeLine(x, y, x+ElementDistance, y);
     }
 
     public static void main(String[] args) {
