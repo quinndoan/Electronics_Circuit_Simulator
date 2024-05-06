@@ -104,9 +104,9 @@
             </VBox>
          </children>
       </HBox>
-      <ScrollPane layoutX="95.0" layoutY="428.0" prefHeight="308.0" prefWidth="367.0">
+      <ScrollPane layoutX="62.0" layoutY="428.0" prefHeight="307.0" prefWidth="489.0">
          <content>
-            <StackPane fx:id="circuit" prefHeight="150.0" prefWidth="200.0" />
+            <StackPane fx:id="circuit" prefHeight="302.0" prefWidth="491.0" />
          </content>
       </ScrollPane>
       <Button layoutX="385.0" layoutY="350.0" mnemonicParsing="false" onAction="#circuitGenerate" styleClass="button2" stylesheets="@style.css" text="Generate">
