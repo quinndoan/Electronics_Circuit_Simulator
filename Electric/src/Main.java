@@ -12,6 +12,8 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 			Scene scene = new Scene(root);
+			scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+			primaryStage.setTitle("Electronic Circuit Simulator");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
