@@ -1,10 +1,6 @@
 import GUI_Components.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.text.html.parser.Element;
-
 import Components.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -134,16 +130,7 @@ import javafx.scene.layout.VBox;
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("R" + slString);
-        // int row = findEmptyRow(grid1);
-        // int column = 0; // Cột luôn là 0 trong trường hợp này
 
-        // // Nếu không tìm thấy hàng trống, thêm một hàng mới
-        // if (row == -1) {
-        // row = grid1.getRowConstraints().size();
-        // grid1.getRowConstraints().add(new RowConstraints());
-        // }
-
-        // Thêm TextArea và Label vào GridPane
         grid1.add(label, 0, R);
         grid1.add(textField, 1, R);
         grid1.add(comboBox, 2, R); // Đặt Label vào hàng tiếp theo
@@ -166,16 +153,6 @@ import javafx.scene.layout.VBox;
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("L" + slString);
-        // int row = findEmptyRow(grid1);
-        // int column = 0; // Cột luôn là 0 trong trường hợp này
-
-        // // Nếu không tìm thấy hàng trống, thêm một hàng mới
-        // if (row == -1) {
-        // row = grid1.getRowConstraints().size();
-        // grid1.getRowConstraints().add(new RowConstraints());
-        // }
-
-        // Thêm TextArea và Label vào GridPane
         grid2.add(label, 0, L);
         grid2.add(textField, 1, L);
         grid2.add(comboBox, 2, L); // Đặt Label vào hàng tiếp theo
@@ -198,16 +175,7 @@ import javafx.scene.layout.VBox;
         soluong++;
         String slString = Integer.toString(soluong);
         label.textProperty().setValue("C" + slString);
-        // int row = findEmptyRow(grid1);
-        // int column = 0; // Cột luôn là 0 trong trường hợp này
 
-        // // Nếu không tìm thấy hàng trống, thêm một hàng mới
-        // if (row == -1) {
-        // row = grid1.getRowConstraints().size();
-        // grid1.getRowConstraints().add(new RowConstraints());
-        // }
-
-        // Thêm TextArea và Label vào GridPane
         grid3.add(label, 0, C);
         grid3.add(textField, 1, C);
         grid3.add(comboBox, 2, C); // Đặt Label vào hàng tiếp theo
