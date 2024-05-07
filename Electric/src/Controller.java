@@ -56,6 +56,8 @@ public class Controller extends input implements Initializable, inputVoltage {
     private Button resetButton;
     @FXML
     private TextField textField2;
+    public int type = 0;
+
 
     // Hàm được gọi khi sự kiện chọn mục xảy ra trong ComboBox
     @FXML
@@ -122,6 +124,7 @@ public class Controller extends input implements Initializable, inputVoltage {
         C = 0;
         soluong = 0;
         ElementList.clear();
+        type = 0;
     }
 
     @FXML
@@ -196,13 +199,24 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     }
 
+
     @FXML
+    public void ChooseParallelCircuitType(ActionEvent event) {
+        type = 1;
+    }
+    @FXML
+    public void ChooseSerialCircuitType(ActionEvent event) {
+        type = 2;
+    }
 
     public void circuitGenerate(ActionEvent event) {
         Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        if(ElementList.size()>0) drawParallelCircuitDiagram(gc);
+        System.out.println(type);
+        if(ElementList.size()>0) {
+            if(type == 1) drawParallelCircuitDiagram(gc);
+            if(type == 2) drawSerialCircuitDiagram(gc);
+        }
 
         circuit.getChildren().add(canvas);
 
