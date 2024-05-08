@@ -199,7 +199,6 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     }
 
-
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
         type = 1;
