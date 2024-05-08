@@ -18,6 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.scene.text.Text;
 
 public class Controller extends input implements Initializable, inputVoltage {
 
@@ -57,7 +58,10 @@ public class Controller extends input implements Initializable, inputVoltage {
     @FXML
     private TextField textField2;
     public int type = 0;
-
+    @FXML
+    private Text text1;
+    @FXML
+    private Text text2;
 
     // Hàm được gọi khi sự kiện chọn mục xảy ra trong ComboBox
     @FXML
@@ -99,6 +103,8 @@ public class Controller extends input implements Initializable, inputVoltage {
         name2.setVisible(false);
         unit1.setVisible(false);
         unit2.setVisible(false);
+        text1.setVisible(false);
+        text2.setVisible(false);
     }
 
     @FXML
@@ -114,6 +120,8 @@ public class Controller extends input implements Initializable, inputVoltage {
         name2.setVisible(false);
         unit1.setVisible(false);
         unit2.setVisible(false);
+        text1.setVisible(false);
+        text2.setVisible(false);
         circuit.getChildren().clear(); // Xóa hết các thành phần trong StackPane
         ;
         comboBoxVol.getSelectionModel().clearSelection(); // Xóa lựa chọn trong ComboBox
@@ -199,23 +207,28 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     }
 
-
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
         type = 1;
+        text1.setVisible(true);
     }
+
     @FXML
     public void ChooseSerialCircuitType(ActionEvent event) {
         type = 2;
+        text2.setVisible(true);
+
     }
 
     public void circuitGenerate(ActionEvent event) {
         Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         System.out.println(type);
-        if(ElementList.size()>0) {
-            if(type == 1) drawParallelCircuitDiagram(gc);
-            if(type == 2) drawSerialCircuitDiagram(gc);
+        if (ElementList.size() > 0) {
+            if (type == 1)
+                drawParallelCircuitDiagram(gc);
+            if (type == 2)
+                drawSerialCircuitDiagram(gc);
         }
 
         circuit.getChildren().add(canvas);
@@ -230,26 +243,26 @@ public class Controller extends input implements Initializable, inputVoltage {
         drawParallelVoltageSource(gc, x, y);
         drawParallelLine(gc, x, y);
 
-        for(int i=0;i<ElementList.size();i++)
-        {
+        for (int i = 0; i < ElementList.size(); i++) {
             String c = ElementList.get(i);
 
-            if(c.charAt(0) == 'R') {
+            if (c.charAt(0) == 'R') {
                 drawParallelResistor(gc, x += Distance, y);
                 gc.fillText(c, x + 20, y + 65);
             }
 
-            if(c.charAt(0) == 'L') {
+            if (c.charAt(0) == 'L') {
                 drawParallelInductor(gc, x += Distance, y);
                 gc.fillText(c, x + 25, y + 65);
             }
-            
-            if(c.charAt(0) == 'C') {
-                drawParallelCapacitor(gc,  x += Distance, y);
+
+            if (c.charAt(0) == 'C') {
+                drawParallelCapacitor(gc, x += Distance, y);
                 gc.fillText(c, x + 20, y + 65);
             }
 
-            if(i+1 < ElementList.size()) drawParallelLine(gc, x, y);
+            if (i + 1 < ElementList.size())
+                drawParallelLine(gc, x, y);
         }
 
     }
@@ -333,36 +346,35 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     private void drawSerialCircuitDiagram(GraphicsContext gc) {
 
-        int x = 50; 
+        int x = 50;
         int y = 100;
         int x_start = x;
 
         drawSerialLine(gc, x, y);
-        x+=ElementDistance;
+        x += ElementDistance;
 
-        for(int i=0; i<ElementList.size(); i++)
-        {
+        for (int i = 0; i < ElementList.size(); i++) {
             String c = ElementList.get(i);
-            if(c.charAt(0) == 'R') {
+            if (c.charAt(0) == 'R') {
                 drawSerialResistor(gc, x, y);
                 gc.fillText(c, x + 12, y - 20);
-                x+=ResitorLength;
+                x += ResitorLength;
             }
 
-            if(c.charAt(0) == 'L') {
+            if (c.charAt(0) == 'L') {
                 drawSerialInductor(gc, x, y);
                 gc.fillText(c, x + 12, y - 30);
-                x+=InductorLength;
+                x += InductorLength;
             }
 
-            if(c.charAt(0) == 'C') {
+            if (c.charAt(0) == 'C') {
                 drawSerialCapacitor(gc, x, y);
                 gc.fillText(c, x - 2, y - 20);
-                x+=CapacitorLength;
+                x += CapacitorLength;
             }
 
             drawSerialLine(gc, x, y);
-            x+=ElementDistance;
+            x += ElementDistance;
         }
 
         int x_voltage = (x - x_start - VoltageLength) / 2 + x_start;
@@ -378,47 +390,46 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     private void drawSerialResistor(GraphicsContext gc, double x, double y) {
 
-        //resitor
-        gc.strokeLine(x, y, x+6, y-10);
-        gc.strokeLine(x+6, y-10, x+13, y+10);
-        gc.strokeLine(x+13, y+10, x+20, y-10);
-        gc.strokeLine(x+20, y-10, x+27, y+10);
-        gc.strokeLine(x+27, y+10, x+34, y-10);
-        gc.strokeLine(x+34, y-10, x+40, y);
-        
+        // resitor
+        gc.strokeLine(x, y, x + 6, y - 10);
+        gc.strokeLine(x + 6, y - 10, x + 13, y + 10);
+        gc.strokeLine(x + 13, y + 10, x + 20, y - 10);
+        gc.strokeLine(x + 20, y - 10, x + 27, y + 10);
+        gc.strokeLine(x + 27, y + 10, x + 34, y - 10);
+        gc.strokeLine(x + 34, y - 10, x + 40, y);
+
     }
 
     private void drawSerialCapacitor(GraphicsContext gc, double x, double y) {
 
-        gc.strokeLine(x, y-10, x, y+10);
-        gc.strokeLine(x+10, y-10, x+10, y+10);
+        gc.strokeLine(x, y - 10, x, y + 10);
+        gc.strokeLine(x + 10, y - 10, x + 10, y + 10);
 
     }
 
     private void drawSerialInductor(GraphicsContext gc, double x, double y) {
 
-        //inductor
-        gc.strokeArc(x, y-20, 14, 38, 180+40+90, 180+50, ArcType.OPEN );
-        gc.strokeArc(x+9, y-20, 14, 38, 180+40+90, 180+100, ArcType.OPEN );
-        gc.strokeArc(x+18, y-20, 14, 38, 180+40+90, 180+100, ArcType.OPEN );
-        gc.strokeArc(x+27, y-20, 12, 38, 180+90+90, 180+50, ArcType.OPEN );
+        // inductor
+        gc.strokeArc(x, y - 20, 14, 38, 180 + 40 + 90, 180 + 50, ArcType.OPEN);
+        gc.strokeArc(x + 9, y - 20, 14, 38, 180 + 40 + 90, 180 + 100, ArcType.OPEN);
+        gc.strokeArc(x + 18, y - 20, 14, 38, 180 + 40 + 90, 180 + 100, ArcType.OPEN);
+        gc.strokeArc(x + 27, y - 20, 12, 38, 180 + 90 + 90, 180 + 50, ArcType.OPEN);
     }
 
     private void drawSerialVoltageSource(GraphicsContext gc, double x, double y) {
-        gc.strokeOval(x,y-20,40,40);
+        gc.strokeOval(x, y - 20, 40, 40);
 
-        //dau cong
-        gc.strokeLine(x+5, y, x+15, y);
-        gc.strokeLine(x+10, y-5, x+10, y+5);
+        // dau cong
+        gc.strokeLine(x + 5, y, x + 15, y);
+        gc.strokeLine(x + 10, y - 5, x + 10, y + 5);
 
-        //dau tru
-        gc.strokeLine(x+25, y, x+35, y);
-        
-        
+        // dau tru
+        gc.strokeLine(x + 25, y, x + 35, y);
+
     }
 
     private void drawSerialLine(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(x, y, x+ElementDistance, y);
+        gc.strokeLine(x, y, x + ElementDistance, y);
     }
 
 }

@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1154.0" styleClass="label" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1154.0" styleClass="label" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <HBox layoutX="344.0" layoutY="114.0" prefHeight="215.0" prefWidth="728.0">
          <children>
@@ -132,7 +132,7 @@
             <Font name="Arial Bold" size="18.0" />
          </font>
       </Button>
-      <HBox layoutX="124.0" prefHeight="59.0" prefWidth="343.0">
+      <HBox layoutX="14.0" prefHeight="59.0" prefWidth="343.0">
          <children>
             <Button mnemonicParsing="false" onAction="#ChooseParallelCircuitType" prefHeight="43.0" prefWidth="179.0" styleClass="button3" text="Parallel">
                <font>
@@ -144,5 +144,15 @@
                </font></Button>
          </children>
       </HBox>
+      <Text fx:id="text1" layoutX="599.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARALLEL CIRCUIT">
+         <font>
+            <Font name="Arial Bold" size="24.0" />
+         </font>
+      </Text>
+      <Text fx:id="text2" layoutX="619.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SERIAL CIRCUIT">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
