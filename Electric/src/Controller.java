@@ -210,12 +210,16 @@ public class Controller extends input implements Initializable, inputVoltage {
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
         type = 1;
+        circuit.getChildren().clear();
+        text2.setVisible(false);
         text1.setVisible(true);
     }
 
     @FXML
     public void ChooseSerialCircuitType(ActionEvent event) {
         type = 2;
+        circuit.getChildren().clear();
+        text1.setVisible(false);
         text2.setVisible(true);
 
     }
