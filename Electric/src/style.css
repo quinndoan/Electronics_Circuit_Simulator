@@ -44,6 +44,24 @@
     /* Màu nền khi nhấn */
 }
 
+.button3 {
+    -fx-background-color: #ECECEC;
+    -fx-text-fill: black;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: black;
+}
+
+.button3:pressed {
+    -fx-text-fill: rgb(186, 12, 12);
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: rgb(186, 12, 12);
+
+}
+
+.root {
+    -fx-background-color: #ECECEC
+}
+
 .vbox {
     -fx-background-color: #ECECEC;
     /* Màu nền */
