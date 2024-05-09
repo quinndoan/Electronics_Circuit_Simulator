@@ -95,11 +95,6 @@
             </VBox>
          </children>
       </HBox>
-      <ScrollPane layoutX="62.0" layoutY="428.0" prefHeight="307.0" prefWidth="489.0">
-         <content>
-            <StackPane fx:id="circuit" prefHeight="302.0" prefWidth="491.0" />
-         </content>
-      </ScrollPane>
       <Button layoutX="385.0" layoutY="350.0" mnemonicParsing="false" onAction="#circuitGenerate" styleClass="button2" stylesheets="@style.css" text="Generate">
          <font>
             <Font name="Arial Bold" size="18.0" />
@@ -154,5 +149,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
+      <StackPane fx:id="circuit" layoutX="39.0" layoutY="465.0" prefHeight="247.0" prefWidth="541.0" />
    </children>
 </AnchorPane>

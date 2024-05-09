@@ -16,5 +16,7 @@ public abstract class input {
     public int R = 0;
     public int C = 0;
     public int L = 0;
-
+    public String AC_Voltage;
+    public String AC_Frequency;
+    public String DC_Voltage;
 }

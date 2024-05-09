@@ -86,6 +86,7 @@ public class Controller extends input implements Initializable, inputVoltage {
                 unit2.setVisible(true);
             } else if ("DC".equals(selectedItem)) {
                 textField1.setVisible(true);
+                DC_Voltage = textField1.getText();
                 name1.setVisible(true);
                 unit1.setVisible(true);
 
@@ -210,7 +211,6 @@ public class Controller extends input implements Initializable, inputVoltage {
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
         type = 1;
-        circuit.getChildren().clear();
         text2.setVisible(false);
         text1.setVisible(true);
     }
@@ -218,7 +218,6 @@ public class Controller extends input implements Initializable, inputVoltage {
     @FXML
     public void ChooseSerialCircuitType(ActionEvent event) {
         type = 2;
-        circuit.getChildren().clear();
         text1.setVisible(false);
         text2.setVisible(true);
 
@@ -227,7 +226,7 @@ public class Controller extends input implements Initializable, inputVoltage {
     public void circuitGenerate(ActionEvent event) {
         Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        System.out.println(type);
+        circuit.getChildren().clear();
         if (ElementList.size() > 0) {
             if (type == 1)
                 drawParallelCircuitDiagram(gc);
@@ -243,8 +242,12 @@ public class Controller extends input implements Initializable, inputVoltage {
         int x = 30;
         int y = 50;
         int Distance = 80;
+        AC_Voltage = textField1.getText() + "V";
+        AC_Frequency = textField2.getText() + "Hz";
 
         drawParallelVoltageSource(gc, x, y);
+        gc.fillText(AC_Voltage, x + 25, y + 55);
+        gc.fillText(AC_Frequency, x + 25, y + 70);
         drawParallelLine(gc, x, y);
 
         for (int i = 0; i < ElementList.size(); i++) {
