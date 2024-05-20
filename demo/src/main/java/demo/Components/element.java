@@ -10,12 +10,12 @@ public abstract class element {
     }
 	public abstract Complex getImpedance(double frequency);
 
-    public Complex getVoltage(Complex current) {
+    public Complex getVoltage(Complex current, double frequency) {
         return current.multiply(getImpedance(frequency)); // xu ly Complex
 		// cho truong hop AC 
     }
 
-    public Complex getCurrent(Complex voltage) {
+    public Complex getCurrent(Complex voltage, double frequency) {
         return voltage.divide(getImpedance(frequency));
     }
 }
