@@ -1,10 +1,12 @@
 package demo.Components;
 
-public class Inductor extends element{
+public class Inductor extends element {
+    public Inductor(double inductance) {
+        super(inductance);
+    }
 
-	public Inductor(double value) {
-		// TODO Auto-generated constructor stub
-		super(value);
-	}
-
+    @Override
+    public Complex getImpedance(double frequency) {
+        return new Complex(0, 2 * Math.PI * frequency * value);
+    }
 }

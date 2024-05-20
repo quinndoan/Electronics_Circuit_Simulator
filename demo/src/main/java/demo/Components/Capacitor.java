@@ -1,10 +1,12 @@
 package demo.Components;
 
-public class Capacitor extends element{
+public class Capacitor extends element {
+    public Capacitor(double capacitance) {
+        super(capacitance);
+    }
 
-	public Capacitor(double value) {
-		// TODO Auto-generated constructor stub
-		super(value);
-	}
-
+    @Override
+    public Complex getImpedance(double frequency) {
+        return new Complex(0, -1 / (2 * Math.PI * frequency * value));
+    }
 }
