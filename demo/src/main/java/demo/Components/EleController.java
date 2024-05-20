@@ -11,7 +11,7 @@ public class EleController {
     private int circuitType; // Thêm trường type
 
     public EleController(double uValue, String voltageType, Resistor[] resistorArray, Capacitor[] capacitorArray, Inductor[] inductorArray, int circuitType) {
-        this.voltage = new VoltageSource(voltageType, uValue);
+        this.voltage = new VoltageSource(voltageType, new Complex(uValue,0));
         resistors = new ArrayList<>();
         capacitors = new ArrayList<>();
         inductors = new ArrayList<>();
@@ -29,34 +29,16 @@ public class EleController {
         this.circuitType = circuitType; // Đặt giá trị cho trường type
     }
 
-    // Các phương thức khác...
-
-    // public Complex getEquivalentImpedance(double frequency) {
-    //     Complex equivalentImpedance = new Complex(0, 0);
-    // // Trường hợp mạch nối tiếp
-    //     // Tính toán trở kháng tương đương cho các resistor
-    //     for (Resistor resistor : resistors) {
-    //         equivalentImpedance = equivalentImpedance.add(resistor.getImpedance(frequency));
-    //     }
     
-    //     // Tính toán trở kháng tương đương cho các capacitor
-    //     for (Capacitor capacitor : capacitors) {
-    //         equivalentImpedance = equivalentImpedance.add(capacitor.getImpedance(frequency));
-    //     }
-    
-    //     // Tính toán trở kháng tương đương cho các inductor
-    //     for (Inductor inductor : inductors) {
-    //         equivalentImpedance = equivalentImpedance.add(inductor.getImpedance(frequency));
-    //     }
-    
-    //     return equivalentImpedance;
-    // }
-    public Complex getEquivalentImpedance(double frequency) {
+    public Complex getEquivalentImpedance(double frequency) throws Exception {
         Complex equivalentImpedance = new Complex(0, 0);
     
         if (circuitType == 1) { // Parallel circuit
             for (element element : elements) {
-                equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency).inverse());
+                if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
+                    throw new Exception("Short circuit");
+                }
+                equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency).inverse());// mạch song song nên R phải lấy nghịch đảo của tổng nghịch đảo
             }
             equivalentImpedance = equivalentImpedance.inverse();
         } else if (circuitType == 2) { // Serial circuit
@@ -65,8 +47,57 @@ public class EleController {
             }
         }
     
+        if (equivalentImpedance.getReal() == 0 && equivalentImpedance.getImaginary() == 0) {
+            throw new Exception("Short circuit");
+        }
+    
         return equivalentImpedance;
     }
     
-    
+    public Complex getVoltage(element element, double frequency) {
+        if (circuitType == 1) { // Parallel circuit
+            return voltage.getVoltage(); // U = Vsource
+        } else if (circuitType == 2) { // Serial circuit
+            return getCurrent(element, frequency).multiply(element.getImpedance(frequency)); // U = I * R
+        }
+        return new Complex(0, 0); // Default case
+    }
+
+    public Complex getCurrent(element element, double frequency) {
+        if (circuitType == 1) { // Parallel circuit
+            return voltage.getVoltage().divide(element.getImpedance(frequency)); // I = Vsource / R
+        } else if (circuitType == 2) { // Serial circuit
+            try {
+                return voltage.getVoltage().divide(getEquivalentImpedance(frequency));
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Complex(0, 0); // Trả về một giá trị mặc định khi có lỗi
+            }
+            
+        }
+        return new Complex(0, 0); // Default case
+    }
+
+    public boolean detectShortCircuit(double frequency) {
+        for (element element : elements) {
+            if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void printCircuitAnalysisTable(double frequency) {
+        System.out.println("Element\t\tImpedance\tVoltage\t\tCurrent");
+        for (element element : elements) {
+            Complex impedance = element.getImpedance(frequency);
+            Complex voltage = getVoltage(element, frequency);
+            Complex current = getCurrent(element, frequency);
+            System.out.println(element.getClass().getSimpleName() + "\t\t" + impedance.getReal() + " + " + impedance.getImaginary() + "i\t" + voltage.getReal() + " + " + voltage.getImaginary() + "i\t" + current.getReal() + " + " + current.getImaginary() + "i");
+        }
+    }
+
 }
+    
+    
+
