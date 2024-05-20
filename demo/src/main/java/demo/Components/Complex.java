@@ -37,5 +37,10 @@ public class Complex {
         double imaginaryPart = (this.imaginary * other.real - this.real * other.imaginary) / denominator;
         return new Complex(realPart, imaginaryPart);
     }
+
+    public Complex inverse() {
+        double scale = real * real + imaginary * imaginary;
+        return new Complex(real / scale, -imaginary / scale);
+    }
 }
 
