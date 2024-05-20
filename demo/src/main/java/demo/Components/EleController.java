@@ -15,15 +15,19 @@ public class EleController {
         resistors = new ArrayList<>();
         capacitors = new ArrayList<>();
         inductors = new ArrayList<>();
+        elements = new ArrayList<>();
         for (Resistor resistor : resistorArray) {
             resistors.add(resistor);
+            elements.add(resistor);
         }
 
         for (Capacitor capacitor : capacitorArray) {
             capacitors.add(capacitor);
+            elements.add(capacitor);
         }
         for (Inductor inductor : inductorArray) {
             inductors.add(inductor);
+            elements.add(inductor);
         }
 
         this.circuitType = circuitType; // Đặt giá trị cho trường type
