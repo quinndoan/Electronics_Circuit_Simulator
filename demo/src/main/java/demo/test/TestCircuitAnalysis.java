@@ -1,4 +1,4 @@
-package demo;
+package demo.test;
 import demo.Components.Capacitor;
 import demo.Components.Complex;
 import demo.Components.EleController;
