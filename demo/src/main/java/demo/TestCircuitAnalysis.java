@@ -23,6 +23,10 @@ public class TestCircuitAnalysis {
             Complex calculatedVoltage = circuit.getVoltage(resistors[0], 0);
             Complex calculatedCurrent = circuit.getCurrent(resistors[0], 0);
 
+            System.out.println("Calculated equivalent R: " + calculatedImpedance);
+            System.out.println("Calculated U: " + calculatedVoltage);
+            System.out.println("Calculated I: " + calculatedCurrent);
+
             System.out.println("Check equivalent R: " + (calculatedImpedance.equals(expectedImpedance) ? "Đúng" : "Sai"));
             System.out.println("Check U: " + (calculatedVoltage.equals(expectedVoltage) ? "Đúng" : "Sai"));
             System.out.println("Check I: " + (calculatedCurrent.equals(expectedCurrent) ? "Đúng" : "Sai"));
