@@ -42,5 +42,9 @@ public class Complex {
         double scale = real * real + imaginary * imaginary;
         return new Complex(real / scale, -imaginary / scale);
     }
+    @Override
+    public String toString() {
+        return real + " + " + imaginary + "i";
+    }
 }
 
