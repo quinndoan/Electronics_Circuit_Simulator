@@ -33,35 +33,7 @@ public class EleController {
         this.circuitType = circuitType; // Đặt giá trị cho trường type
     }
 
-    
-    // public Complex getEquivalentImpedance(double frequency) throws Exception {
-    //     Complex equivalentImpedance;
-    
-    //     if (circuitType == 1) { // Parallel circuit
-    //         equivalentImpedance = new Complex(0, 0);
-    //         for (element element : elements) {
-    //             Complex impedance = element.getImpedance(frequency);
-    //             if (impedance.getReal() == 0 && impedance.getImaginary() == 0) {
-    //                 throw new Exception("Short circuit");
-    //             }
-    //             equivalentImpedance = equivalentImpedance.add(impedance.inverse());
-    //         }
-    //         equivalentImpedance = equivalentImpedance.inverse();
-    //     } else if (circuitType == 2) { // Serial circuit
-    //         equivalentImpedance = new Complex(0, 0);
-    //         for (element element : elements) {
-    //             equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency));
-    //         }
-    //     } else {
-    //         throw new IllegalArgumentException("Invalid circuit type");
-    //     }
-    
-    //     if (equivalentImpedance.getReal() == 0 && equivalentImpedance.getImaginary() == 0) {
-    //         throw new Exception("Short circuit");
-    //     }
-    
-    //     return equivalentImpedance;
-    // }
+
 
     public Complex getEquivalentImpedance(double frequency) throws Exception {
         Complex equivalentImpedance;
