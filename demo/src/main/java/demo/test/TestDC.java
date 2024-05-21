@@ -20,7 +20,7 @@ public class TestDC{
             };
 
             // Khởi tạo EleController với các phần tử trong mạch
-            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, inductors, 2); // 2 là mạch nối tiếp
+            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, inductors, 1); // 2 là mạch nối tiếp
             
             // Chạy hàm getEquivalentImpedance với tần số cụ thể (ví dụ: 0 Hz cho DC)
             double frequency = 0.0;
