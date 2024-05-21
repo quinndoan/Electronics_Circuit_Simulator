@@ -35,20 +35,25 @@ public class EleController {
 
     
     public Complex getEquivalentImpedance(double frequency) throws Exception {
-        Complex equivalentImpedance = new Complex(0, 0);
+        Complex equivalentImpedance;
     
         if (circuitType == 1) { // Parallel circuit
+            equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
-                if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
+                Complex impedance = element.getImpedance(frequency);
+                if (impedance.getReal() == 0 && impedance.getImaginary() == 0) {
                     throw new Exception("Short circuit");
                 }
-                equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency).inverse());// mạch song song nên R phải lấy nghịch đảo của tổng nghịch đảo
+                equivalentImpedance = equivalentImpedance.add(impedance.inverse());
             }
             equivalentImpedance = equivalentImpedance.inverse();
         } else if (circuitType == 2) { // Serial circuit
+            equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
                 equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency));
             }
+        } else {
+            throw new IllegalArgumentException("Invalid circuit type");
         }
     
         if (equivalentImpedance.getReal() == 0 && equivalentImpedance.getImaginary() == 0) {
@@ -57,6 +62,7 @@ public class EleController {
     
         return equivalentImpedance;
     }
+
     
     public Complex getVoltage(element element, double frequency) {
         if (circuitType == 1) { // Parallel circuit
