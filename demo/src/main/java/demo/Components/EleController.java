@@ -34,9 +34,38 @@ public class EleController {
     }
 
     
+    // public Complex getEquivalentImpedance(double frequency) throws Exception {
+    //     Complex equivalentImpedance;
+    
+    //     if (circuitType == 1) { // Parallel circuit
+    //         equivalentImpedance = new Complex(0, 0);
+    //         for (element element : elements) {
+    //             Complex impedance = element.getImpedance(frequency);
+    //             if (impedance.getReal() == 0 && impedance.getImaginary() == 0) {
+    //                 throw new Exception("Short circuit");
+    //             }
+    //             equivalentImpedance = equivalentImpedance.add(impedance.inverse());
+    //         }
+    //         equivalentImpedance = equivalentImpedance.inverse();
+    //     } else if (circuitType == 2) { // Serial circuit
+    //         equivalentImpedance = new Complex(0, 0);
+    //         for (element element : elements) {
+    //             equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency));
+    //         }
+    //     } else {
+    //         throw new IllegalArgumentException("Invalid circuit type");
+    //     }
+    
+    //     if (equivalentImpedance.getReal() == 0 && equivalentImpedance.getImaginary() == 0) {
+    //         throw new Exception("Short circuit");
+    //     }
+    
+    //     return equivalentImpedance;
+    // }
+
     public Complex getEquivalentImpedance(double frequency) throws Exception {
         Complex equivalentImpedance;
-    
+        
         if (circuitType == 1) { // Parallel circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
@@ -50,18 +79,20 @@ public class EleController {
         } else if (circuitType == 2) { // Serial circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
-                equivalentImpedance = equivalentImpedance.add(element.getImpedance(frequency));
+                Complex impedance = element.getImpedance(frequency);
+                equivalentImpedance = equivalentImpedance.add(impedance);
             }
         } else {
             throw new IllegalArgumentException("Invalid circuit type");
         }
-    
+        
         if (equivalentImpedance.getReal() == 0 && equivalentImpedance.getImaginary() == 0) {
             throw new Exception("Short circuit");
         }
-    
+        
         return equivalentImpedance;
     }
+    
 
     
     public Complex getVoltage(element element, double frequency) {
@@ -98,12 +129,12 @@ public class EleController {
     }
 
     public void printCircuitAnalysisTable(double frequency) {
-        System.out.println("Element\t\tImpedance\tVoltage\t\tCurrent");
+        System.out.println("Element\t\t\t\tImpedance\t\t\tVoltage\t\t\tCurrent");
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
             Complex voltage = getVoltage(element, frequency);
             Complex current = getCurrent(element, frequency);
-            System.out.println(element.getClass().getSimpleName() + "\t\t" + impedance.getReal() + " + " + impedance.getImaginary() + "i\t" + voltage.getReal() + " + " + voltage.getImaginary() + "i\t" + current.getReal() + " + " + current.getImaginary() + "i");
+            System.out.println(element.getClass().getSimpleName() + "\t\t\t" + impedance.getReal() + " + " + impedance.getImaginary() + "i\t\t" + voltage.getReal() + " + " + voltage.getImaginary() + "i\t\t" + current.getReal() + " + " + current.getImaginary() + "i");
         }
     }
 
