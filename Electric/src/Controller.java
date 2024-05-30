@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -57,7 +58,9 @@ public class Controller extends input implements Initializable, inputVoltage {
     private Button resetButton;
     @FXML
     private TextField textField2;
-    public int type = 0;
+    public int CircuitType = 0;
+    public int VoltageType = 0;
+
     @FXML
     private Text text1;
     @FXML
@@ -78,6 +81,7 @@ public class Controller extends input implements Initializable, inputVoltage {
 
             // Kiểm tra giá trị được chọn và hiển thị các TextField tương ứng
             if ("AC".equals(selectedItem)) {
+                VoltageType = 1;
                 textField1.setVisible(true);
                 textField2.setVisible(true);
                 name1.setVisible(true);
@@ -85,11 +89,10 @@ public class Controller extends input implements Initializable, inputVoltage {
                 unit1.setVisible(true);
                 unit2.setVisible(true);
             } else if ("DC".equals(selectedItem)) {
+                VoltageType = 2;
                 textField1.setVisible(true);
-                DC_Voltage = textField1.getText();
                 name1.setVisible(true);
                 unit1.setVisible(true);
-
             }
         }
     }
@@ -133,11 +136,21 @@ public class Controller extends input implements Initializable, inputVoltage {
         C = 0;
         soluong = 0;
         ElementList.clear();
-        type = 0;
+        CircuitType = 0;
+        VoltageType = 0;
     }
 
     @FXML
     public void addResistor(ActionEvent event) {
+        if(soluong == 5) {
+            // Show an alert when the number of resistors reaches 5
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Limit Reached");
+            alert.setHeaderText(null);
+            alert.setContentText("You have reached the maximum number of elements.");
+            alert.showAndWait();
+        }
+        else {
         TextField textField = new TextField();
         textField.setPromptText("Enter Resistor");
         ComboBox<String> comboBox = new ComboBox<String>();
@@ -157,10 +170,20 @@ public class Controller extends input implements Initializable, inputVoltage {
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid1.getColumnConstraints().add(colConstraints);
+        }
 
     }
 
     public void addInductor(ActionEvent event) {
+        if(soluong == 5) {
+            // Show an alert when the number of resistors reaches 5
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Limit Reached");
+            alert.setHeaderText(null);
+            alert.setContentText("You have reached the maximum number of elements.");
+            alert.showAndWait();
+        }
+        else {
         TextField textField = new TextField();
         textField.setPromptText("Enter Inductor");
         ComboBox<String> comboBox = new ComboBox<String>();
@@ -181,10 +204,20 @@ public class Controller extends input implements Initializable, inputVoltage {
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid2.getColumnConstraints().add(colConstraints);
+        }
 
     }
 
     public void addCapacitor(ActionEvent event) {
+        if(soluong == 5) {
+            // Show an alert when the number of resistors reaches 5
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Limit Reached");
+            alert.setHeaderText(null);
+            alert.setContentText("You have reached the maximum number of elements.");
+            alert.showAndWait();
+        }
+        else {
         TextField textField = new TextField();
         textField.setPromptText("Enter Capacitor");
         ComboBox<String> comboBox = new ComboBox<String>();
@@ -205,19 +238,19 @@ public class Controller extends input implements Initializable, inputVoltage {
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid3.getColumnConstraints().add(colConstraints);
-
+        }
     }
 
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
-        type = 1;
+        CircuitType = 1;
         text2.setVisible(false);
         text1.setVisible(true);
     }
 
     @FXML
     public void ChooseSerialCircuitType(ActionEvent event) {
-        type = 2;
+        CircuitType = 2;
         text1.setVisible(false);
         text2.setVisible(true);
 
@@ -228,9 +261,9 @@ public class Controller extends input implements Initializable, inputVoltage {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         circuit.getChildren().clear();
         if (ElementList.size() > 0) {
-            if (type == 1)
+            if (CircuitType == 1)
                 drawParallelCircuitDiagram(gc);
-            if (type == 2)
+            if (CircuitType == 2)
                 drawSerialCircuitDiagram(gc);
         }
 
@@ -242,8 +275,15 @@ public class Controller extends input implements Initializable, inputVoltage {
         int x = 30;
         int y = 50;
         int Distance = 80;
-        AC_Voltage = textField1.getText() + "V";
-        AC_Frequency = textField2.getText() + "Hz";
+        if(VoltageType == 1)
+        {
+            AC_Voltage = textField1.getText() + "V";
+            AC_Frequency = textField2.getText() + "Hz";
+        }
+        if(VoltageType == 2)
+        {
+            DC_Voltage =textField1.getText() + "V";
+        }
 
         drawParallelVoltageSource(gc, x, y);
         gc.fillText(AC_Voltage, x + 25, y + 55);
@@ -323,14 +363,24 @@ public class Controller extends input implements Initializable, inputVoltage {
     }
 
     private void drawParallelVoltageSource(GraphicsContext gc, double x, double y) {
+        // hinh tron
         gc.strokeOval(x - 20, y + 40, 40, 40);
 
-        // dau cong
-        gc.strokeLine(x, y + 50, x, y + 60);
-        gc.strokeLine(x - 5, y + 55, x + 5, y + 55);
+        if(VoltageType == 1)
+        {
+            gc.strokeArc(x - 13, y + 50, 13, 18, 0, 180, ArcType.OPEN);
+            gc.strokeArc(x , y + 50, 13, 18, 180, 180, ArcType.OPEN);
+        }
 
-        // dau tru
-        gc.strokeLine(x - 5, y + 70, x + 5, y + 70);
+        if(VoltageType == 2)
+        {
+            // dau cong
+            gc.strokeLine(x, y + 50, x, y + 60);
+            gc.strokeLine(x - 5, y + 55, x + 5, y + 55);
+
+            // dau tru
+            gc.strokeLine(x - 5, y + 70, x + 5, y + 70);
+        }
 
         // duong day tren
         gc.strokeLine(x, y, x, y + 40);
@@ -426,13 +476,23 @@ public class Controller extends input implements Initializable, inputVoltage {
     private void drawSerialVoltageSource(GraphicsContext gc, double x, double y) {
         gc.strokeOval(x, y - 20, 40, 40);
 
-        // dau cong
-        gc.strokeLine(x + 5, y, x + 15, y);
-        gc.strokeLine(x + 10, y - 5, x + 10, y + 5);
+        if(VoltageType == 1)
+        {
+            gc.strokeArc(x + 7, y - 10, 13, 18, 0, 180, ArcType.OPEN);
+            gc.strokeArc(x + 20, y - 10, 13, 18, 180, 180, ArcType.OPEN);
+        }
 
-        // dau tru
-        gc.strokeLine(x + 25, y, x + 35, y);
+        if(VoltageType == 2)
+        {
+            // dau cong
+            gc.strokeLine(x + 5, y, x + 15, y);
+            gc.strokeLine(x + 10, y - 5, x + 10, y + 5);
 
+            // dau tru
+            gc.strokeLine(x + 25, y, x + 35, y);
+
+
+        }
     }
 
     private void drawSerialLine(GraphicsContext gc, double x, double y) {
