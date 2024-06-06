@@ -2,6 +2,8 @@ package demo.Components;
 import java.util.ArrayList; // Import lớp ArrayList
 import java.util.List;
 
+import demo.Components.complexNum.Complex;
+
 public class EleController {
     private List<element> elements; // them list cho element
     public ArrayList<Resistor> resistors;
@@ -9,6 +11,12 @@ public class EleController {
     public ArrayList<Inductor> inductors;
     public VoltageSource voltage;
     private int circuitType; // Thêm trường type
+
+    public List<element> getElements() {
+        return elements;
+    }
+
+
 
     public EleController(double uValue, String voltageType, Resistor[] resistorArray, Capacitor[] capacitorArray, Inductor[] inductorArray, int circuitType) {
         this.voltage = new VoltageSource(voltageType, new Complex(uValue,0));

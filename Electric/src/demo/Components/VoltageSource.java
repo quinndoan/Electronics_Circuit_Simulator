@@ -1,5 +1,7 @@
 package demo.Components;
 
+import demo.Components.complexNum.Complex;
+
 public class VoltageSource {
 	public String type;
 	public Complex uValue;

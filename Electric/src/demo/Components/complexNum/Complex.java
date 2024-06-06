@@ -1,4 +1,4 @@
-package demo.Components;
+package demo.Components.complexNum;
 // file xu ly tinh toan so phuc
 public class Complex {
     private double real;

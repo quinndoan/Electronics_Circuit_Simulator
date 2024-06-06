@@ -1,5 +1,7 @@
 package demo.Components;
 
+import demo.Components.complexNum.Complex;
+
 public class Capacitor extends element {
     public Capacitor(double capacitance) {
         super(capacitance);

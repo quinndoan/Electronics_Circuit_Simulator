@@ -4,7 +4,7 @@ import demo.Components.*;
 import demo.Components.Capacitor;
 import demo.Components.Inductor;
 import demo.Components.Resistor;
-import drawcircuit.drawParallelCircuit;
+import demo.Components.tableAnalysis.createTable;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,20 +19,26 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Text;
 import drawcircuit.*;
-public class Controller extends input implements Initializable, inputVoltage {
+
+public class Controller extends input implements Initializable {
+    private createTable table = new createTable();
     private drawParallelCircuit parallelCircuit = new drawParallelCircuit();
     private drawSerialCircuit serialCircuit = new drawSerialCircuit();
     private int soluong = 0;
-    private ArrayList<String> ElementList = new ArrayList<String>();
+    private ArrayList<String> ElementList = new ArrayList<String>(); // lưu tên thành phần cộng với số thứ tự
+    @FXML
+    private GridPane grid_cell;
     @FXML
     Canvas canvas = new Canvas(600, 400);
     @FXML
@@ -51,7 +57,9 @@ public class Controller extends input implements Initializable, inputVoltage {
     ComboBox<String> comboBoxVol = new ComboBox<>();
     public int circuitType = 0;
     public int voltageType = 0;
-    
+
+    @FXML
+    HBox footer;
     @FXML
     private VBox vbox2;
     @FXML
@@ -68,7 +76,6 @@ public class Controller extends input implements Initializable, inputVoltage {
     private Button resetButton;
     @FXML
     private TextField textField2;
-
 
     @FXML
     private Text text1;
@@ -118,6 +125,9 @@ public class Controller extends input implements Initializable, inputVoltage {
         unit2.setVisible(false);
         text1.setVisible(false);
         text2.setVisible(false);
+        table = new createTable();
+        footer.getChildren().add(table.createTable());
+
     }
 
     @FXML
@@ -154,25 +164,23 @@ public class Controller extends input implements Initializable, inputVoltage {
         Canvas canvas = new Canvas(600, 300);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         circuit.getChildren().clear();
-        if(voltageType == 1)
-        {
-            AC_Voltage = textField1.getText() ;
-            AC_Frequency = textField2.getText() ;
+        if (voltageType == 1) {
+            AC_Voltage = textField1.getText();
+            AC_Frequency = textField2.getText();
             if (ElementList.size() > 0) {
                 if (circuitType == 1)
-                parallelCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
+                    parallelCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
                 if (circuitType == 2)
-                serialCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
+                    serialCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
             }
         }
-        if(voltageType == 2)
-        {
-            DC_Voltage = textField1.getText() ;
+        if (voltageType == 2) {
+            DC_Voltage = textField1.getText();
             if (ElementList.size() > 0) {
                 if (circuitType == 1)
-                parallelCircuit.drawCircuitDiagram(gc, DC_Voltage, null , ElementList);
+                    parallelCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
                 if (circuitType == 2)
-                serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
+                    serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
             }
         }
 
@@ -182,147 +190,134 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     @FXML
     public void addResistor(ActionEvent event) {
-        if(soluong == 5) {
+        if (soluong == 5) {
             // Show an alert when the number of resistors reaches 5
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Limit Reached");
             alert.setHeaderText(null);
             alert.setContentText("You have reached the maximum number of elements.");
             alert.showAndWait();
-        }
-        else {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter Resistor");
-        ComboBox<String> comboBox = new ComboBox<String>();
-        comboBox.getStyleClass().add("my-combobox");
-        comboBox.setPromptText("Ω");
-        comboBox.setItems(list1);
-        Label label = new Label();
-        soluong++;
-        String slString = Integer.toString(soluong);
-        label.textProperty().setValue("R" + slString);
-        ElementList.add("R" + slString);
+        } else {
+            Label unit = new Label("Ω");
+            TextField textField = new TextField();
+            textField.setPromptText("Enter Resistor");
+            Label label = new Label();
+            soluong++;
+            String slString = Integer.toString(soluong);
+            label.textProperty().setValue("R" + slString);
+            ElementList.add("R" + slString);
 
-        grid1.add(label, 0, R);
-        grid1.add(textField, 1, R);
-        grid1.add(comboBox, 2, R); // Đặt Label vào hàng tiếp theo
+            grid1.add(label, 0, R);
+            grid1.add(textField, 1, R);
+            grid1.add(unit, 2, R); // Đặt Label vào hàng tiếp theo
 
-        R++;
-        // Add a listener to handle the input after the user enters it
-        textField.setOnAction(e -> {
-            String s = textField.getText();
-            if (s != null && !s.isEmpty()) {
-                try {
-                    double value = Double.parseDouble(s);
-                    CircuitResistor[R] = new Resistor(value);
-                    System.out.println("Added resistor with value: " + value);
-                } catch (NumberFormatException ex) {
-                    // Handle the case where the input is not a valid number
-                    System.out.println("Invalid input: " + s);
+            R++;
+            // Add a listener to handle the input after the user enters it
+            textField.setOnAction(e -> {
+                String s = textField.getText();
+                if (s != null && !s.isEmpty()) {
+                    try {
+                        double value = Double.parseDouble(s);
+                        CircuitResistor[R] = new Resistor(value);
+                        System.out.println("Added resistor with value: " + value);
+                    } catch (NumberFormatException ex) {
+                        // Handle the case where the input is not a valid number
+                        System.out.println("Invalid input: " + s);
+                    }
                 }
-            }
-        });
+            });
 
-        ColumnConstraints colConstraints = new ColumnConstraints();
-        colConstraints.setPercentWidth(100);
-        grid1.getColumnConstraints().add(colConstraints);
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setPercentWidth(100);
+            grid1.getColumnConstraints().add(colConstraints);
         }
 
     }
 
     public void addInductor(ActionEvent event) {
-        if(soluong == 5) {
+        Label unit = new Label("H");
+
+        if (soluong == 5) {
             // Show an alert when the number of resistors reaches 5
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Limit Reached");
             alert.setHeaderText(null);
             alert.setContentText("You have reached the maximum number of elements.");
             alert.showAndWait();
-        }
-        else {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter Inductor");
-        ComboBox<String> comboBox = new ComboBox<String>();
-        comboBox.getStyleClass().add("my-combobox");
+        } else {
+            TextField textField = new TextField();
+            textField.setPromptText("Enter Inductor");
+            Label label = new Label();
+            soluong++;
+            String slString = Integer.toString(soluong);
+            label.textProperty().setValue("L" + slString);
+            ElementList.add("L" + slString);
 
-        comboBox.setPromptText("H");
-        comboBox.setItems(list2);
-        Label label = new Label();
-        soluong++;
-        String slString = Integer.toString(soluong);
-        label.textProperty().setValue("L" + slString);
-        ElementList.add("L" + slString);
+            grid2.add(label, 0, L);
+            grid2.add(textField, 1, L);
+            grid2.add(unit, 2, L); // Đặt Label vào hàng tiếp theo
+            L++;
 
-        grid2.add(label, 0, L);
-        grid2.add(textField, 1, L);
-        grid2.add(comboBox, 2, L); // Đặt Label vào hàng tiếp theo
-        L++;
-
-        textField.setOnAction(e -> {
-            String s = textField.getText();
-            if (s != null && !s.isEmpty()) {
-                try {
-                    double value = Double.parseDouble(s);
-                    CircuitInductor[L] = new Inductor(value);
-                    System.out.println("Added inductor with value: " + value);
-                } catch (NumberFormatException ex) {
-                    // Handle the case where the input is not a valid number
-                    System.out.println("Invalid input: " + s);
+            textField.setOnAction(e -> {
+                String s = textField.getText();
+                if (s != null && !s.isEmpty()) {
+                    try {
+                        double value = Double.parseDouble(s);
+                        CircuitInductor[L] = new Inductor(value);
+                        System.out.println("Added inductor with value: " + value);
+                    } catch (NumberFormatException ex) {
+                        // Handle the case where the input is not a valid number
+                        System.out.println("Invalid input: " + s);
+                    }
                 }
-            }
-        });
+            });
 
-        ColumnConstraints colConstraints = new ColumnConstraints();
-        colConstraints.setPercentWidth(100);
-        grid2.getColumnConstraints().add(colConstraints);
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setPercentWidth(100);
+            grid2.getColumnConstraints().add(colConstraints);
         }
 
     }
 
     public void addCapacitor(ActionEvent event) {
-        if(soluong == 5) {
+        Label unit = new Label("F");
+        if (soluong == 5) {
             // Show an alert when the number of resistors reaches 5
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Limit Reached");
             alert.setHeaderText(null);
             alert.setContentText("You have reached the maximum number of elements.");
             alert.showAndWait();
-        }
-        else {
-        TextField textField = new TextField();
-        textField.setPromptText("Enter Capacitor");
-        ComboBox<String> comboBox = new ComboBox<String>();
-        comboBox.getStyleClass().add("my-combobox");
+        } else {
+            TextField textField = new TextField();
+            textField.setPromptText("Enter Capacitor");
+            Label label = new Label();
+            soluong++;
+            String slString = Integer.toString(soluong);
+            label.textProperty().setValue("C" + slString);
+            ElementList.add("C" + slString);
 
-        comboBox.setPromptText("F");
-        comboBox.setItems(list3);
-        Label label = new Label();
-        soluong++;
-        String slString = Integer.toString(soluong);
-        label.textProperty().setValue("C" + slString);
-        ElementList.add("C" + slString);
+            grid3.add(label, 0, C);
+            grid3.add(textField, 1, C);
+            grid3.add(unit, 2, C); // Đặt Label vào hàng tiếp theo
+            C++;
 
-        grid3.add(label, 0, C);
-        grid3.add(textField, 1, C);
-        grid3.add(comboBox, 2, C); // Đặt Label vào hàng tiếp theo
-        C++;
-
-        textField.setOnAction(e -> {
-            String s = textField.getText();
-            if (s != null && !s.isEmpty()) {
-                try {
-                    double value = Double.parseDouble(s);
-                    CircuitCapacitor[R] = new Capacitor(value);
-                    System.out.println("Added capacitor with value: " + value);
-                } catch (NumberFormatException ex) {
-                    // Handle the case where the input is not a valid number
-                    System.out.println("Invalid input: " + s);
+            textField.setOnAction(e -> {
+                String s = textField.getText();
+                if (s != null && !s.isEmpty()) {
+                    try {
+                        double value = Double.parseDouble(s);
+                        CircuitCapacitor[R] = new Capacitor(value);
+                        System.out.println("Added capacitor with value: " + value);
+                    } catch (NumberFormatException ex) {
+                        // Handle the case where the input is not a valid number
+                        System.out.println("Invalid input: " + s);
+                    }
                 }
-            }
-        });
-        ColumnConstraints colConstraints = new ColumnConstraints();
-        colConstraints.setPercentWidth(100);
-        grid3.getColumnConstraints().add(colConstraints);
+            });
+            ColumnConstraints colConstraints = new ColumnConstraints();
+            colConstraints.setPercentWidth(100);
+            grid3.getColumnConstraints().add(colConstraints);
         }
     }
 

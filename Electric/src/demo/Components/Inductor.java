@@ -1,5 +1,7 @@
 package demo.Components;
 
+import demo.Components.complexNum.Complex;
+
 public class Inductor extends element {
     public Inductor(double inductance) {
         super(inductance);

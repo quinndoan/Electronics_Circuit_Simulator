@@ -1,5 +1,7 @@
 package demo.Components;
 
+import demo.Components.complexNum.Complex;
+
 public class Resistor extends element {
     public Resistor(double resistance) {
         super(resistance);

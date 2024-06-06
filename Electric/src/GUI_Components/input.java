@@ -7,15 +7,13 @@ import demo.Components.Inductor;
 import demo.Components.Resistor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public abstract class input {
     public ArrayList<TextField> textFieldsR;
     public ArrayList<TextField> textFieldsL;
     public ArrayList<TextField> textFieldsC;
-    public ObservableList<String> list3 = FXCollections.observableArrayList("F", "kF", "MF");
-    public ObservableList<String> list1 = FXCollections.observableArrayList("Ω", "kΩ", "MΩ");
-    public ObservableList<String> list2 = FXCollections.observableArrayList("H", "kH", "MH");
     public int R = 0;
     public int C = 0;
     public int L = 0;
@@ -28,4 +26,8 @@ public abstract class input {
     public Resistor[] CircuitResistor = new Resistor[10];
     public Inductor[] CircuitInductor = new Inductor[10];
     public Capacitor[] CircuitCapacitor = new Capacitor[10];
+    public Label sourceLabel = new Label();
+    public TextField inputsourcField = new TextField();
+    public Label giatri = new Label();
+    public ObservableList<String> list = FXCollections.observableArrayList("AC", "DC");
 }
