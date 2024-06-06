@@ -1,8 +1,15 @@
+
 import GUI_Components.*;
+import demo.Components.*;
+import demo.Components.Capacitor;
+import demo.Components.Inductor;
+import demo.Components.Resistor;
+import drawcircuit.drawParallelCircuit;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-import Components.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,9 +27,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Text;
-
+import drawcircuit.*;
 public class Controller extends input implements Initializable, inputVoltage {
-
+    private drawParallelCircuit parallelCircuit = new drawParallelCircuit();
+    private drawSerialCircuit serialCircuit = new drawSerialCircuit();
     private int soluong = 0;
     private ArrayList<String> ElementList = new ArrayList<String>();
     @FXML
@@ -41,7 +49,9 @@ public class Controller extends input implements Initializable, inputVoltage {
     private StackPane circuit;
     @FXML
     ComboBox<String> comboBoxVol = new ComboBox<>();
-
+    public int circuitType = 0;
+    public int voltageType = 0;
+    
     @FXML
     private VBox vbox2;
     @FXML
@@ -58,8 +68,7 @@ public class Controller extends input implements Initializable, inputVoltage {
     private Button resetButton;
     @FXML
     private TextField textField2;
-    public int CircuitType = 0;
-    public int VoltageType = 0;
+
 
     @FXML
     private Text text1;
@@ -81,7 +90,7 @@ public class Controller extends input implements Initializable, inputVoltage {
 
             // Kiểm tra giá trị được chọn và hiển thị các TextField tương ứng
             if ("AC".equals(selectedItem)) {
-                VoltageType = 1;
+                voltageType = 1;
                 textField1.setVisible(true);
                 textField2.setVisible(true);
                 name1.setVisible(true);
@@ -89,7 +98,7 @@ public class Controller extends input implements Initializable, inputVoltage {
                 unit1.setVisible(true);
                 unit2.setVisible(true);
             } else if ("DC".equals(selectedItem)) {
-                VoltageType = 2;
+                voltageType = 2;
                 textField1.setVisible(true);
                 name1.setVisible(true);
                 unit1.setVisible(true);
@@ -136,8 +145,39 @@ public class Controller extends input implements Initializable, inputVoltage {
         C = 0;
         soluong = 0;
         ElementList.clear();
-        CircuitType = 0;
-        VoltageType = 0;
+        circuitType = 0;
+        voltageType = 0;
+    }
+
+    @FXML
+    public void circuitGenerate(ActionEvent event) {
+        Canvas canvas = new Canvas(600, 300);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        circuit.getChildren().clear();
+        if(voltageType == 1)
+        {
+            AC_Voltage = textField1.getText() ;
+            AC_Frequency = textField2.getText() ;
+            if (ElementList.size() > 0) {
+                if (circuitType == 1)
+                parallelCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
+                if (circuitType == 2)
+                serialCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
+            }
+        }
+        if(voltageType == 2)
+        {
+            DC_Voltage = textField1.getText() ;
+            if (ElementList.size() > 0) {
+                if (circuitType == 1)
+                parallelCircuit.drawCircuitDiagram(gc, DC_Voltage, null , ElementList);
+                if (circuitType == 2)
+                serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
+            }
+        }
+
+        circuit.getChildren().add(canvas);
+
     }
 
     @FXML
@@ -166,7 +206,23 @@ public class Controller extends input implements Initializable, inputVoltage {
         grid1.add(label, 0, R);
         grid1.add(textField, 1, R);
         grid1.add(comboBox, 2, R); // Đặt Label vào hàng tiếp theo
+
         R++;
+        // Add a listener to handle the input after the user enters it
+        textField.setOnAction(e -> {
+            String s = textField.getText();
+            if (s != null && !s.isEmpty()) {
+                try {
+                    double value = Double.parseDouble(s);
+                    CircuitResistor[R] = new Resistor(value);
+                    System.out.println("Added resistor with value: " + value);
+                } catch (NumberFormatException ex) {
+                    // Handle the case where the input is not a valid number
+                    System.out.println("Invalid input: " + s);
+                }
+            }
+        });
+
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid1.getColumnConstraints().add(colConstraints);
@@ -201,6 +257,21 @@ public class Controller extends input implements Initializable, inputVoltage {
         grid2.add(textField, 1, L);
         grid2.add(comboBox, 2, L); // Đặt Label vào hàng tiếp theo
         L++;
+
+        textField.setOnAction(e -> {
+            String s = textField.getText();
+            if (s != null && !s.isEmpty()) {
+                try {
+                    double value = Double.parseDouble(s);
+                    CircuitInductor[L] = new Inductor(value);
+                    System.out.println("Added inductor with value: " + value);
+                } catch (NumberFormatException ex) {
+                    // Handle the case where the input is not a valid number
+                    System.out.println("Invalid input: " + s);
+                }
+            }
+        });
+
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid2.getColumnConstraints().add(colConstraints);
@@ -235,6 +306,20 @@ public class Controller extends input implements Initializable, inputVoltage {
         grid3.add(textField, 1, C);
         grid3.add(comboBox, 2, C); // Đặt Label vào hàng tiếp theo
         C++;
+
+        textField.setOnAction(e -> {
+            String s = textField.getText();
+            if (s != null && !s.isEmpty()) {
+                try {
+                    double value = Double.parseDouble(s);
+                    CircuitCapacitor[R] = new Capacitor(value);
+                    System.out.println("Added capacitor with value: " + value);
+                } catch (NumberFormatException ex) {
+                    // Handle the case where the input is not a valid number
+                    System.out.println("Invalid input: " + s);
+                }
+            }
+        });
         ColumnConstraints colConstraints = new ColumnConstraints();
         colConstraints.setPercentWidth(100);
         grid3.getColumnConstraints().add(colConstraints);
@@ -243,260 +328,17 @@ public class Controller extends input implements Initializable, inputVoltage {
 
     @FXML
     public void ChooseParallelCircuitType(ActionEvent event) {
-        CircuitType = 1;
+        circuitType = 1;
         text2.setVisible(false);
         text1.setVisible(true);
     }
 
     @FXML
     public void ChooseSerialCircuitType(ActionEvent event) {
-        CircuitType = 2;
+        circuitType = 2;
         text1.setVisible(false);
         text2.setVisible(true);
 
-    }
-
-    public void circuitGenerate(ActionEvent event) {
-        Canvas canvas = new Canvas(600, 300);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        circuit.getChildren().clear();
-        if (ElementList.size() > 0) {
-            if (CircuitType == 1)
-                drawParallelCircuitDiagram(gc);
-            if (CircuitType == 2)
-                drawSerialCircuitDiagram(gc);
-        }
-
-        circuit.getChildren().add(canvas);
-
-    }
-
-    private void drawParallelCircuitDiagram(GraphicsContext gc) {
-        int x = 30;
-        int y = 50;
-        int Distance = 80;
-        if(VoltageType == 1)
-        {
-            AC_Voltage = textField1.getText() + "V";
-            AC_Frequency = textField2.getText() + "Hz";
-        }
-        if(VoltageType == 2)
-        {
-            DC_Voltage =textField1.getText() + "V";
-        }
-
-        drawParallelVoltageSource(gc, x, y);
-        gc.fillText(AC_Voltage, x + 25, y + 55);
-        gc.fillText(AC_Frequency, x + 25, y + 70);
-        drawParallelLine(gc, x, y);
-
-        for (int i = 0; i < ElementList.size(); i++) {
-            String c = ElementList.get(i);
-
-            if (c.charAt(0) == 'R') {
-                drawParallelResistor(gc, x += Distance, y);
-                gc.fillText(c, x + 20, y + 65);
-            }
-
-            if (c.charAt(0) == 'L') {
-                drawParallelInductor(gc, x += Distance, y);
-                gc.fillText(c, x + 25, y + 65);
-            }
-
-            if (c.charAt(0) == 'C') {
-                drawParallelCapacitor(gc, x += Distance, y);
-                gc.fillText(c, x + 20, y + 65);
-            }
-
-            if (i + 1 < ElementList.size())
-                drawParallelLine(gc, x, y);
-        }
-
-    }
-
-    private void drawParallelResistor(GraphicsContext gc, double x, double y) {
-
-        // resitor
-        gc.strokeLine(x, y + 40, x + 10, y + 46);
-        gc.strokeLine(x + 10, y + 45, x - 10, y + 53);
-        gc.strokeLine(x - 10, y + 53, x + 10, y + 60);
-        gc.strokeLine(x + 10, y + 60, x - 10, y + 67);
-        gc.strokeLine(x - 10, y + 67, x + 10, y + 74);
-        gc.strokeLine(x + 10, y + 74, x, y + 80);
-
-        // duong day tren
-        gc.strokeLine(x, y, x, y + 40);
-
-        // duong day duoi
-        gc.strokeLine(x, y + 80, x, y + 120);
-
-    }
-
-    private void drawParallelCapacitor(GraphicsContext gc, double x, double y) {
-
-        // capacitor
-        gc.strokeLine(x, y + 40, x, y + 55);
-        gc.strokeLine(x - 10, y + 55, x + 10, y + 55);
-        gc.strokeLine(x - 10, y + 65, x + 10, y + 65);
-        gc.strokeLine(x, y + 65, x, y + 80);
-
-        // duong day tren
-        gc.strokeLine(x, y, x, y + 40);
-
-        // duong day duoi
-        gc.strokeLine(x, y + 80, x, y + 120);
-    }
-
-    private void drawParallelInductor(GraphicsContext gc, double x, double y) {
-
-        // inductor
-        gc.strokeArc(x - 20, y + 40, 38, 14, 180 + 40, 180 + 50, ArcType.OPEN);
-        gc.strokeArc(x - 20, y + 49, 38, 14, 180 + 40, 180 + 100, ArcType.OPEN);
-        gc.strokeArc(x - 20, y + 58, 38, 14, 180 + 40, 180 + 100, ArcType.OPEN);
-        gc.strokeArc(x - 20, y + 67, 38, 12, 180 + 90, 180 + 50, ArcType.OPEN);
-
-        // duong day tren
-        gc.strokeLine(x, y, x, y + 40);
-
-        // duong day duoi
-        gc.strokeLine(x, y + 80, x, y + 120);
-    }
-
-    private void drawParallelVoltageSource(GraphicsContext gc, double x, double y) {
-        // hinh tron
-        gc.strokeOval(x - 20, y + 40, 40, 40);
-
-        if(VoltageType == 1)
-        {
-            gc.strokeArc(x - 13, y + 50, 13, 18, 0, 180, ArcType.OPEN);
-            gc.strokeArc(x , y + 50, 13, 18, 180, 180, ArcType.OPEN);
-        }
-
-        if(VoltageType == 2)
-        {
-            // dau cong
-            gc.strokeLine(x, y + 50, x, y + 60);
-            gc.strokeLine(x - 5, y + 55, x + 5, y + 55);
-
-            // dau tru
-            gc.strokeLine(x - 5, y + 70, x + 5, y + 70);
-        }
-
-        // duong day tren
-        gc.strokeLine(x, y, x, y + 40);
-
-        // duong day duoi
-        gc.strokeLine(x, y + 80, x, y + 120);
-
-    }
-
-    private void drawParallelLine(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(x, y, x + 80, y);
-        gc.strokeLine(x, y + 120, x + 80, y + 120);
-    }
-
-    int ElementDistance = 50;
-    int ResitorLength = 40;
-    int InductorLength = 40;
-    int VoltageLength = 40;
-    int CapacitorLength = 10;
-
-    private void drawSerialCircuitDiagram(GraphicsContext gc) {
-
-        int x = 50;
-        int y = 100;
-        int x_start = x;
-
-        drawSerialLine(gc, x, y);
-        x += ElementDistance;
-
-        for (int i = 0; i < ElementList.size(); i++) {
-            String c = ElementList.get(i);
-            if (c.charAt(0) == 'R') {
-                drawSerialResistor(gc, x, y);
-                gc.fillText(c, x + 12, y - 20);
-                x += ResitorLength;
-            }
-
-            if (c.charAt(0) == 'L') {
-                drawSerialInductor(gc, x, y);
-                gc.fillText(c, x + 12, y - 30);
-                x += InductorLength;
-            }
-
-            if (c.charAt(0) == 'C') {
-                drawSerialCapacitor(gc, x, y);
-                gc.fillText(c, x - 2, y - 20);
-                x += CapacitorLength;
-            }
-
-            drawSerialLine(gc, x, y);
-            x += ElementDistance;
-        }
-
-        int x_voltage = (x - x_start - VoltageLength) / 2 + x_start;
-        int gap = 50;
-
-        drawSerialVoltageSource(gc, x_voltage, y + gap);
-
-        gc.strokeLine(x_start, y + gap, x_voltage, y + gap);
-        gc.strokeLine(x_voltage + VoltageLength, y + gap, x, y + gap);
-        gc.strokeLine(x_start, y, x_start, y + gap);
-        gc.strokeLine(x, y, x, y + gap);
-    }
-
-    private void drawSerialResistor(GraphicsContext gc, double x, double y) {
-
-        // resitor
-        gc.strokeLine(x, y, x + 6, y - 10);
-        gc.strokeLine(x + 6, y - 10, x + 13, y + 10);
-        gc.strokeLine(x + 13, y + 10, x + 20, y - 10);
-        gc.strokeLine(x + 20, y - 10, x + 27, y + 10);
-        gc.strokeLine(x + 27, y + 10, x + 34, y - 10);
-        gc.strokeLine(x + 34, y - 10, x + 40, y);
-
-    }
-
-    private void drawSerialCapacitor(GraphicsContext gc, double x, double y) {
-
-        gc.strokeLine(x, y - 10, x, y + 10);
-        gc.strokeLine(x + 10, y - 10, x + 10, y + 10);
-
-    }
-
-    private void drawSerialInductor(GraphicsContext gc, double x, double y) {
-
-        // inductor
-        gc.strokeArc(x, y - 20, 14, 38, 180 + 40 + 90, 180 + 50, ArcType.OPEN);
-        gc.strokeArc(x + 9, y - 20, 14, 38, 180 + 40 + 90, 180 + 100, ArcType.OPEN);
-        gc.strokeArc(x + 18, y - 20, 14, 38, 180 + 40 + 90, 180 + 100, ArcType.OPEN);
-        gc.strokeArc(x + 27, y - 20, 12, 38, 180 + 90 + 90, 180 + 50, ArcType.OPEN);
-    }
-
-    private void drawSerialVoltageSource(GraphicsContext gc, double x, double y) {
-        gc.strokeOval(x, y - 20, 40, 40);
-
-        if(VoltageType == 1)
-        {
-            gc.strokeArc(x + 7, y - 10, 13, 18, 0, 180, ArcType.OPEN);
-            gc.strokeArc(x + 20, y - 10, 13, 18, 180, 180, ArcType.OPEN);
-        }
-
-        if(VoltageType == 2)
-        {
-            // dau cong
-            gc.strokeLine(x + 5, y, x + 15, y);
-            gc.strokeLine(x + 10, y - 5, x + 10, y + 5);
-
-            // dau tru
-            gc.strokeLine(x + 25, y, x + 35, y);
-
-
-        }
-    }
-
-    private void drawSerialLine(GraphicsContext gc, double x, double y) {
-        gc.strokeLine(x, y, x + ElementDistance, y);
     }
 
 }
