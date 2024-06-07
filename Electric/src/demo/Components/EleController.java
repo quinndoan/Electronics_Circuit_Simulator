@@ -14,6 +14,7 @@ public class EleController {
     public ArrayList<String> ElementList;
     private int circuitType; // Thêm trường type
     public double frequency;
+
     public List<element> getElements() {
         return elements;
     }
@@ -48,6 +49,7 @@ public class EleController {
         this.inductors = inductors;
         this.elements = Elements;
         this.circuitType = circuitType; // Đặt giá trị cho trường type
+        this.ElementList = ElementList;
     }
 
     public Complex getEquivalentImpedance(double frequency) throws Exception {
@@ -103,7 +105,6 @@ public class EleController {
         }
         return new Complex(0, 0); // Default case
     }
-
 
     public boolean detectShortCircuit(double frequency) {
         for (element element : elements) {

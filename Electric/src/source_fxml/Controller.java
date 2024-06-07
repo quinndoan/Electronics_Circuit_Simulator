@@ -1,3 +1,5 @@
+package source_fxml;
+
 
 import GUI_Components.*;
 import demo.Components.Capacitor;
@@ -183,17 +185,21 @@ public class Controller extends input implements Initializable {
                     "AC", CircuitResistor,
                     CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
             vBox.getChildren().clear();
-            vBox.getChildren().add(table.analysisTable(handleEleController));
+            vBox.getChildren().add(table.analysisTableAC(handleEleController));
 
         }
         if (voltageType == 2) {
             DC_Voltage = textField1.getText();
+            double voltage = Double.parseDouble(DC_Voltage);
             if (ElementList.size() > 0) {
                 if (circuitType == 1)
                     parallelCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
                 if (circuitType == 2)
                     serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
             }
+            EleController hanController = new EleController(voltage, "DC", CircuitResistor, CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
+            vBox.getChildren().clear();
+            vBox.getChildren().add(table.analysisTableDC(hanController));
         }
 
         circuit.getChildren().add(canvas);

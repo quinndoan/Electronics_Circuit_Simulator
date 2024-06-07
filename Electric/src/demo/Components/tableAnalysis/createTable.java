@@ -33,7 +33,7 @@ public class createTable {
         }
     }
 
-    public TableView<Table> analysisTable(EleController e) {
+    public TableView<Table> analysisTableAC(EleController e) {
         TableView<Table> tableView = new TableView<>();
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -61,6 +61,7 @@ public class createTable {
         double frequency = e.getFrequency();
         List<String> impedanceIntensityValues = new ArrayList<>();
         List<String> voltageIntensityValues = new ArrayList<>();
+        List<String> currentIntensityValues = new ArrayList<>();
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
             String imString1 = Double.toString(impedance.getReal());
@@ -72,13 +73,66 @@ public class createTable {
             String cuString2 = Double.toString(voltage.getImaginary());
             String cString = cuString1 + " + " + cuString2 + "i";
             Complex current = e.getCurrent(element, frequency);
+            String donString1 = Double.toString(current.getReal());
+            String donString2 = Double.toString(current.getImaginary());
+            String doString = donString1 + " + " + donString2 + "i";
             voltageIntensityValues.add(cString);
-
+            currentIntensityValues.add(doString);
         }
         // Tạo dữ liệu mẫu
         ObservableList<Table> data = FXCollections.observableArrayList(
                 new Table("U (Voltage)", "V", voltageIntensityValues),
-                new Table("I (Current intensity)", "A", impedanceIntensityValues), // Thêm giá trị từ biến imString
+                new Table("I (Current intensity)", "A", currentIntensityValues), // Thêm giá trị từ biến imString
+                new Table("R (Resistance)", "Ω", impedanceIntensityValues));
+
+        // Thêm dữ liệu vào TableView
+        tableView.setItems(data);
+
+        return tableView;
+    }
+
+    public TableView<Table> analysisTableDC(EleController e) {
+        TableView<Table> tableView = new TableView<>();
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // Tạo cột cho parameter
+        TableColumn<Table, String> parameterColumn = new TableColumn<>("Parameter");
+        parameterColumn.setCellValueFactory(cellData -> cellData.getValue().getProperty("Parameter"));
+        tableView.getColumns().add(parameterColumn);
+
+        // Tạo cột cho mỗi phần tử trong elementList từ EleController
+        List<String> elementList = e.getElementList();
+        for (int i = 0; i < elementList.size(); i++) {
+            String columnName = "R" + (i + 1);
+            TableColumn<Table, String> col = new TableColumn<>(elementList.get(i));
+            col.setCellValueFactory(cellData -> cellData.getValue().getProperty(columnName));
+            col.setPrefWidth(50);
+            tableView.getColumns().add(col);
+        }
+        TableColumn<Table, String> unitColumn = new TableColumn<>("Unit");
+        unitColumn.setCellValueFactory(cellData -> cellData.getValue().getProperty("Unit"));
+        unitColumn.setPrefWidth(50);
+        tableView.getColumns().add(unitColumn);
+        List<element> elements = e.getElements();
+        double frequency = e.getFrequency();
+        List<String> impedanceIntensityValues = new ArrayList<>();
+        List<String> voltageIntensityValues = new ArrayList<>();
+        List<String> currentIntensityValues = new ArrayList<>();
+        for (element element : elements) {
+            Complex impedance = element.getImpedance(frequency);
+            String imString = Double.toString(impedance.getReal());
+            impedanceIntensityValues.add(imString); // Thêm giá trị từ biến imString
+            Complex voltage = e.getVoltage(element, frequency);
+            String cuString = Double.toString(voltage.getReal());
+            Complex current = e.getCurrent(element, frequency);
+            String donString = Double.toString(current.getReal());
+            voltageIntensityValues.add(cuString);
+            currentIntensityValues.add(donString);
+        }
+        // Tạo dữ liệu mẫu
+        ObservableList<Table> data = FXCollections.observableArrayList(
+                new Table("U (Voltage)", "V", voltageIntensityValues),
+                new Table("I (Current intensity)", "A", currentIntensityValues), // Thêm giá trị từ biến imString
                 new Table("R (Resistance)", "Ω", impedanceIntensityValues));
 
         // Thêm dữ liệu vào TableView
