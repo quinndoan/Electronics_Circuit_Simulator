@@ -10,7 +10,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="label" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" styleClass="label" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
       <HBox layoutX="344.0" layoutY="114.0" prefHeight="231.0" prefWidth="707.0">
          <children>
@@ -149,24 +149,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <HBox layoutY="391.0" prefHeight="208.0" prefWidth="1051.0">
-         <children>
-            <StackPane fx:id="circuit" prefHeight="247.0" prefWidth="541.0" />
-            <GridPane fx:id="grid_cell" style="-fx-border-color: black; ck: ;">
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
-            </TableView>
-         </children>
-      </HBox>
+      <StackPane fx:id="circuit" layoutY="433.0" prefHeight="200.0" prefWidth="431.0" />
+      <VBox fx:id="vBox" layoutX="571.0" layoutY="479.0" prefHeight="126.0" prefWidth="474.0" />
    </children>
 </AnchorPane>

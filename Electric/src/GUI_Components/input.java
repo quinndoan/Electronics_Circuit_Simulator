@@ -23,9 +23,9 @@ public abstract class input {
     public String AC_Voltage;
     public String AC_Frequency;
     public String DC_Voltage;
-    public Resistor[] CircuitResistor = new Resistor[10];
-    public Inductor[] CircuitInductor = new Inductor[10];
-    public Capacitor[] CircuitCapacitor = new Capacitor[10];
+    public ArrayList<Resistor> CircuitResistor = new ArrayList<>();
+    public ArrayList<Inductor> CircuitInductor = new ArrayList<>();
+    public ArrayList<Capacitor> CircuitCapacitor = new ArrayList<>();
     public Label sourceLabel = new Label();
     public TextField inputsourcField = new TextField();
     public Label giatri = new Label();

@@ -1,14 +1,17 @@
 
 import GUI_Components.*;
-import demo.Components.*;
 import demo.Components.Capacitor;
+import demo.Components.EleController;
 import demo.Components.Inductor;
 import demo.Components.Resistor;
+import demo.Components.element;
 import demo.Components.tableAnalysis.createTable;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.swing.text.html.parser.Element;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,15 +22,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 import javafx.scene.text.Text;
 import drawcircuit.*;
 
@@ -36,6 +36,7 @@ public class Controller extends input implements Initializable {
     private drawParallelCircuit parallelCircuit = new drawParallelCircuit();
     private drawSerialCircuit serialCircuit = new drawSerialCircuit();
     private int soluong = 0;
+    private ArrayList<element> elements = new ArrayList<>();
     private ArrayList<String> ElementList = new ArrayList<String>(); // lưu tên thành phần cộng với số thứ tự
     @FXML
     private GridPane grid_cell;
@@ -76,7 +77,8 @@ public class Controller extends input implements Initializable {
     private Button resetButton;
     @FXML
     private TextField textField2;
-
+    @FXML
+    private VBox vBox;
     @FXML
     private Text text1;
     @FXML
@@ -126,12 +128,12 @@ public class Controller extends input implements Initializable {
         text1.setVisible(false);
         text2.setVisible(false);
         table = new createTable();
-        footer.getChildren().add(table.createTable());
 
     }
 
     @FXML
     public void resettoInitialize(ActionEvent event) {
+        vBox.getChildren().clear();
         grid1.getChildren().clear();
         grid2.getChildren().clear();
         grid3.getChildren().clear();
@@ -166,13 +168,23 @@ public class Controller extends input implements Initializable {
         circuit.getChildren().clear();
         if (voltageType == 1) {
             AC_Voltage = textField1.getText();
+            double voltage = Double.parseDouble(AC_Voltage);
             AC_Frequency = textField2.getText();
+            double frequency = Double.parseDouble(AC_Frequency);
             if (ElementList.size() > 0) {
                 if (circuitType == 1)
                     parallelCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
                 if (circuitType == 2)
                     serialCircuit.drawCircuitDiagram(gc, AC_Voltage, AC_Frequency, ElementList);
             }
+
+            System.out.print(elements.get(0).getValue());
+            EleController handleEleController = new EleController(voltage, frequency,
+                    "AC", CircuitResistor,
+                    CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
+            vBox.getChildren().clear();
+            vBox.getChildren().add(table.analysisTable(handleEleController));
+
         }
         if (voltageType == 2) {
             DC_Voltage = textField1.getText();
@@ -218,7 +230,8 @@ public class Controller extends input implements Initializable {
                 if (s != null && !s.isEmpty()) {
                     try {
                         double value = Double.parseDouble(s);
-                        CircuitResistor[R] = new Resistor(value);
+                        CircuitResistor.add(new Resistor(value));
+                        elements.add(new Resistor(value));
                         System.out.println("Added resistor with value: " + value);
                     } catch (NumberFormatException ex) {
                         // Handle the case where the input is not a valid number
@@ -263,7 +276,8 @@ public class Controller extends input implements Initializable {
                 if (s != null && !s.isEmpty()) {
                     try {
                         double value = Double.parseDouble(s);
-                        CircuitInductor[L] = new Inductor(value);
+                        CircuitInductor.add(new Inductor(value));
+                        elements.add(new Inductor(value));
                         System.out.println("Added inductor with value: " + value);
                     } catch (NumberFormatException ex) {
                         // Handle the case where the input is not a valid number
@@ -307,7 +321,8 @@ public class Controller extends input implements Initializable {
                 if (s != null && !s.isEmpty()) {
                     try {
                         double value = Double.parseDouble(s);
-                        CircuitCapacitor[R] = new Capacitor(value);
+                        CircuitCapacitor.add(new Capacitor(value));
+                        elements.add(new Capacitor(value));
                         System.out.println("Added capacitor with value: " + value);
                     } catch (NumberFormatException ex) {
                         // Handle the case where the input is not a valid number

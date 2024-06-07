@@ -124,6 +124,29 @@
     /* Khoảng cách giữa nội dung và viền */
 }
 
+.table-view {
+    -fx-border-color: rgb(250, 165, 179);
+    /* Màu viền của bảng */
+    -fx-border-width: 0.2;
+    /* Độ dày viền của bảng */
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: rgb(186, 65, 65);
+    -fx-border-color: rgb(250, 165, 179);
+    -fx-border-width: 0.2;
+
+    /* Màu nền khi di chuột lên hàng */
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: rgb(186, 65, 65);
+    -fx-border-color: rgb(250, 165, 179);
+    -fx-border-width: 0.2;
+
+    /* Màu nền khi hàng được chọn */
+}
+
 .grid_cell {
     -fx-border-color: black;
     -fx-border-width: 1px;
