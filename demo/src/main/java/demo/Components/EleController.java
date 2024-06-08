@@ -41,7 +41,7 @@ public class EleController {
 
     public Complex getEquivalentImpedance(double frequency) throws Exception {
         Complex equivalentImpedance;
-
+    
         if (circuitType == 1) { // Parallel circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
@@ -73,38 +73,34 @@ public class EleController {
         } else {
             throw new IllegalArgumentException("Invalid circuit type");
         }
-
-        if (equivalentImpedance.getReal() == Double.POSITIVE_INFINITY || equivalentImpedance.getImaginary() == Double.POSITIVE_INFINITY) {
-            return new Complex(0, 0); // Assume result is 0 for divide by infinity
-        }
-
+    
         return equivalentImpedance;
     }
-
+    
     public Complex getVoltage(element element, double frequency) {
         if (circuitType == 1) { // Parallel circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
-                return new Complex(0, 0); // U = 0 for capacitors in DC
+                return new Complex(0, 0); // Uc = 0 for capacitors in DC
             }
             return voltage.getVoltage(); // U = Vsource
         } else if (circuitType == 2) { // Serial circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
-                return new Complex(0, 0); // U = 0 for capacitors in DC
+                return new Complex(0, 0); // Uc = 0 for capacitors in DC
             }
             return getCurrent(element, frequency).multiply(element.getImpedance(frequency)); // U = I * R
         }
         return new Complex(0, 0); // Default case
     }
-
+    
     public Complex getCurrent(element element, double frequency) {
         if (circuitType == 1) { // Parallel circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
-                return new Complex(0, 0); // I = 0 for capacitors in DC
+                return new Complex(0, 0); // Ic = 0 for capacitors in DC
             }
             return voltage.getVoltage().divide(element.getImpedance(frequency)); // I = Vsource / R
         } else if (circuitType == 2) { // Serial circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
-                return new Complex(0, 0); // I = 0 for capacitors in DC
+                return new Complex(0, 0); // Ic = 0 for capacitors in DC
             }
             try {
                 return voltage.getVoltage().divide(getEquivalentImpedance(frequency));
@@ -115,6 +111,8 @@ public class EleController {
         }
         return new Complex(0, 0); // Default case
     }
+    
+    
 
     public boolean detectShortCircuit(double frequency) {
         for (element element : elements) {

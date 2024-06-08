@@ -35,7 +35,11 @@ public class TestDC_RC {
             Complex equivalentImpedance = eleController.getEquivalentImpedance(Double.POSITIVE_INFINITY);
             
             // In ra giá trị điện trở tương đương
-            System.out.println("Equivalent Impedance for DC: " + equivalentImpedance);
+            if (equivalentImpedance.getReal() == Double.POSITIVE_INFINITY || equivalentImpedance.getImaginary() == Double.POSITIVE_INFINITY) {
+                System.out.println("Equivalent Impedance for DC: Infinity");
+            } else {
+                System.out.println("Equivalent Impedance for DC: " + equivalentImpedance);
+            }
             
             // In ra bảng phân tích mạch
             eleController.printCircuitAnalysisTable(Double.POSITIVE_INFINITY);
@@ -45,3 +49,4 @@ public class TestDC_RC {
         }
     }
 }
+
