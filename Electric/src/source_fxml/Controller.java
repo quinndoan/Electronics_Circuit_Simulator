@@ -2,12 +2,6 @@ package source_fxml;
 
 
 import GUI_Components.*;
-import demo.Components.Capacitor;
-import demo.Components.EleController;
-import demo.Components.Inductor;
-import demo.Components.Resistor;
-import demo.Components.element;
-import demo.Components.tableAnalysis.createTable;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -15,6 +9,12 @@ import java.util.ResourceBundle;
 
 import javax.swing.text.html.parser.Element;
 
+import Components.Capacitor;
+import Components.EleController;
+import Components.Inductor;
+import Components.Resistor;
+import Components.element;
+import Components.tableAnalysis.createTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

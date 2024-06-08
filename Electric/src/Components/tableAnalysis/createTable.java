@@ -1,16 +1,17 @@
-package demo.Components.tableAnalysis;
+package Components.tableAnalysis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import demo.Components.EleController;
-import demo.Components.element;
-import demo.Components.complexNum.Complex;
+import Components.EleController;
+import Components.element;
+import Components.complexNum.Complex;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -48,7 +49,7 @@ public class createTable {
             String columnName = "R" + (i + 1);
             TableColumn<Table, String> col = new TableColumn<>(elementList.get(i));
             col.setCellValueFactory(cellData -> cellData.getValue().getProperty(columnName));
-            col.setPrefWidth(50);
+            col.setPrefWidth(150);
             tableView.getColumns().add(col);
         }
 
@@ -59,22 +60,23 @@ public class createTable {
         tableView.getColumns().add(unitColumn);
         List<element> elements = e.getElements();
         double frequency = e.getFrequency();
+
         List<String> impedanceIntensityValues = new ArrayList<>();
         List<String> voltageIntensityValues = new ArrayList<>();
         List<String> currentIntensityValues = new ArrayList<>();
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
-            String imString1 = Double.toString(impedance.getReal());
-            String imString2 = Double.toString(impedance.getImaginary());
+            String imString1 = String.format("%.2f", impedance.getReal());
+            String imString2 = String.format("%.2f", impedance.getImaginary());
             String imString = imString1 + " + " + imString2 + "i";
             impedanceIntensityValues.add(imString); // Thêm giá trị từ biến imString
             Complex voltage = e.getVoltage(element, frequency);
-            String cuString1 = Double.toString(voltage.getReal());
-            String cuString2 = Double.toString(voltage.getImaginary());
+            String cuString1 = String.format("%.2f", voltage.getReal());
+            String cuString2 = String.format("%.2f", voltage.getImaginary());
             String cString = cuString1 + " + " + cuString2 + "i";
             Complex current = e.getCurrent(element, frequency);
-            String donString1 = Double.toString(current.getReal());
-            String donString2 = Double.toString(current.getImaginary());
+            String donString1 = String.format("%.2f", current.getReal());
+            String donString2 = String.format("%.2f", current.getImaginary());
             String doString = donString1 + " + " + donString2 + "i";
             voltageIntensityValues.add(cString);
             currentIntensityValues.add(doString);
@@ -85,9 +87,7 @@ public class createTable {
                 new Table("I (Current intensity)", "A", currentIntensityValues), // Thêm giá trị từ biến imString
                 new Table("R (Resistance)", "Ω", impedanceIntensityValues));
 
-        // Thêm dữ liệu vào TableView
         tableView.setItems(data);
-
         return tableView;
     }
 

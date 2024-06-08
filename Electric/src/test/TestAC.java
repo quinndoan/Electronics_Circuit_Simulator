@@ -1,11 +1,11 @@
 package test;
 
 
-import demo.Components.Capacitor; // Import các lớp cần thiết
-import demo.Components.EleController;
-import demo.Components.Inductor;
-import demo.Components.Resistor;
-import demo.Components.complexNum.Complex;
+import Components.Capacitor;
+import Components.EleController;
+import Components.Inductor;
+import Components.Resistor;
+import Components.complexNum.Complex;
 
 public class TestAC {
     public static void main(String[] args) {

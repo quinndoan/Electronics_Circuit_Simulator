@@ -1,9 +1,9 @@
 package test;
-import demo.Components.Capacitor;
-import demo.Components.EleController;
-import demo.Components.Inductor;
-import demo.Components.Resistor;
-import demo.Components.complexNum.Complex;
+import Components.Capacitor;
+import Components.EleController;
+import Components.Inductor;
+import Components.Resistor;
+import Components.complexNum.Complex;
 public class TestDC{
     public static void main(String[] args) {
         try {

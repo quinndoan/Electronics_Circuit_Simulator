@@ -1,6 +1,6 @@
-package demo.Components;
+package Components;
 
-import demo.Components.complexNum.Complex;
+import Components.complexNum.Complex;
 
 public class Inductor extends element {
     public Inductor(double inductance) {

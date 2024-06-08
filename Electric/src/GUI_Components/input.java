@@ -2,9 +2,9 @@ package GUI_Components;
 
 import java.util.ArrayList;
 
-import demo.Components.Capacitor;
-import demo.Components.Inductor;
-import demo.Components.Resistor;
+import Components.Capacitor;
+import Components.Inductor;
+import Components.Resistor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;

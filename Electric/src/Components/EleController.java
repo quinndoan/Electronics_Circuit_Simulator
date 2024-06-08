@@ -1,9 +1,9 @@
-package demo.Components;
+package Components;
 
 import java.util.ArrayList; // Import lớp ArrayList
 import java.util.List;
 
-import demo.Components.complexNum.Complex;
+import Components.complexNum.Complex;
 
 public class EleController {
     private List<element> elements; // them list cho element

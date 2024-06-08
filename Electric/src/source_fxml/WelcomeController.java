@@ -37,7 +37,7 @@ public class WelcomeController {
             Stage newStage = new Stage();
 
             Parent root = FXMLLoader.load(getClass().getResource(
-                    "/source_fxml/description.fxml"));
+                    "/source_fxml/des.fxml"));
             Scene scene = new Scene(root);
             newStage.setTitle("Electronic Circuit Simulator");
             scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
