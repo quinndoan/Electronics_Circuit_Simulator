@@ -37,20 +37,21 @@ public class TestDC_RLC {
             elementList.add("Inductor 1");
 
             // Khởi tạo EleController với các phần tử trong mạch
-            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, inductors, elements, 1, elementList);
+            EleController eleController = new EleController(5.0, Double.POSITIVE_INFINITY, "DC", resistors, capacitors, inductors, elements, 1, elementList);
             
             // Thực hiện tính toán
-            Complex equivalentImpedance = eleController.getEquivalentImpedance();
+            Complex equivalentImpedance = eleController.getEquivalentImpedance(Double.POSITIVE_INFINITY);
             
             // In ra giá trị điện trở tương đương
             System.out.println("Equivalent Impedance for DC: " + equivalentImpedance);
             
             // In ra bảng phân tích mạch
-            eleController.printCircuitAnalysisTable();
+            eleController.printCircuitAnalysisTable(Double.POSITIVE_INFINITY);
             
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
+
 
