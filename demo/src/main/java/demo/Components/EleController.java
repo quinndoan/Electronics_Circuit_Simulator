@@ -12,7 +12,7 @@ public class EleController {
     public VoltageSource voltage;
     public ArrayList<String> ElementList;
     private int circuitType; // Thêm trường type
-    public double frequency;
+    private double frequency; // Change to private and remove public access
 
     public List<element> getElements() {
         return elements;
@@ -22,41 +22,26 @@ public class EleController {
         return ElementList;
     }
 
-    public EleController(double uValue, double frequency, String voltageType, ArrayList<Resistor> resistors,
-            ArrayList<Capacitor> capacitors, ArrayList<Inductor> inductors, ArrayList<element> Elements,
-            int circuitType, ArrayList<String> ElementList) {
+    public EleController(double uValue, String voltageType, ArrayList<Resistor> resistors,
+                         ArrayList<Capacitor> capacitors, ArrayList<Inductor> inductors, ArrayList<element> elements,
+                         int circuitType, ArrayList<String> ElementList) {
         this.voltage = new VoltageSource(voltageType, new Complex(uValue, 0));
         this.resistors = resistors;
         this.capacitors = capacitors;
         this.inductors = inductors;
-        this.elements = Elements;
-        this.circuitType = circuitType; // Đặt giá trị cho trường type
+        this.elements = elements;
+        this.circuitType = circuitType;
         this.ElementList = ElementList;
-        this.frequency = (frequency == 0) ? Double.POSITIVE_INFINITY : frequency;
+        this.frequency = voltageType.equals("DC") ? Double.POSITIVE_INFINITY : 0; // Set frequency to infinity if DC
     }
 
-    public double getFrequency() {
+    private double getFrequency() {
         return frequency;
     }
 
-    public EleController(double uValue, String voltageType, ArrayList<Resistor> resistors,
-            ArrayList<Capacitor> capacitors, ArrayList<Inductor> inductors, ArrayList<element> Elements,
-            int circuitType, ArrayList<String> ElementList) {
-        this.voltage = new VoltageSource(voltageType, new Complex(uValue, 0));
-        this.resistors = resistors;
-        this.capacitors = capacitors;
-        this.inductors = inductors;
-        this.elements = Elements;
-        this.circuitType = circuitType; // Đặt giá trị cho trường type
-        this.ElementList = ElementList;
-    }
-
-    public Complex getEquivalentImpedance(double frequency) throws Exception {
+    public Complex getEquivalentImpedance() throws Exception {
+        double frequency = getFrequency();
         Complex equivalentImpedance;
-
-        if (frequency == Double.POSITIVE_INFINITY) {
-            frequency = this.frequency;
-        }
 
         if (circuitType == 1) { // Parallel circuit
             equivalentImpedance = new Complex(0, 0);
@@ -91,29 +76,25 @@ public class EleController {
         return equivalentImpedance;
     }
 
-    public Complex getVoltage(element element, double frequency) {
-        if (frequency == Double.POSITIVE_INFINITY) {
-            frequency = this.frequency;
-        }
+    public Complex getVoltage(element element) {
+        double frequency = getFrequency();
 
         if (circuitType == 1) { // Parallel circuit
             return voltage.getVoltage(); // U = Vsource
         } else if (circuitType == 2) { // Serial circuit
-            return getCurrent(element, frequency).multiply(element.getImpedance(frequency)); // U = I * R
+            return getCurrent(element).multiply(element.getImpedance(frequency)); // U = I * R
         }
         return new Complex(0, 0); // Default case
     }
 
-    public Complex getCurrent(element element, double frequency) {
-        if (frequency == Double.POSITIVE_INFINITY) {
-            frequency = this.frequency;
-        }
+    public Complex getCurrent(element element) {
+        double frequency = getFrequency();
 
         if (circuitType == 1) { // Parallel circuit
             return voltage.getVoltage().divide(element.getImpedance(frequency)); // I = Vsource / R
         } else if (circuitType == 2) { // Serial circuit
             try {
-                return voltage.getVoltage().divide(getEquivalentImpedance(frequency));
+                return voltage.getVoltage().divide(getEquivalentImpedance());
             } catch (Exception e) {
                 e.printStackTrace();
                 return new Complex(0, 0); // Trả về một giá trị mặc định khi có lỗi
@@ -122,7 +103,8 @@ public class EleController {
         return new Complex(0, 0); // Default case
     }
 
-    public boolean detectShortCircuit(double frequency) {
+    public boolean detectShortCircuit() {
+        double frequency = getFrequency();
         for (element element : elements) {
             if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
                 return true;
@@ -131,16 +113,14 @@ public class EleController {
         return false;
     }
 
-    public void printCircuitAnalysisTable(double frequency) {
-        if (frequency == Double.POSITIVE_INFINITY) {
-            frequency = this.frequency;
-        }
+    public void printCircuitAnalysisTable() {
+        double frequency = getFrequency();
 
         System.out.println("Element\t\t\t\tImpedance\t\t\tVoltage\t\t\tCurrent");
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
-            Complex voltage = getVoltage(element, frequency);
-            Complex current = getCurrent(element, frequency);
+            Complex voltage = getVoltage(element);
+            Complex current = getCurrent(element);
             System.out.println(element.getClass().getSimpleName() + "\t\t\t" + impedance.getReal() + " + "
                     + impedance.getImaginary() + "i\t\t" + voltage.getReal() + " + " + voltage.getImaginary() + "i\t\t"
                     + current.getReal() + " + " + current.getImaginary() + "i");
