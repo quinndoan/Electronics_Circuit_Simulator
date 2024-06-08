@@ -14,7 +14,6 @@ public class TestDC_RC {
             // Khởi tạo các phần tử trong mạch
             ArrayList<Resistor> resistors = new ArrayList<>();
             resistors.add(new Resistor(10)); 
-            resistors.add(new Resistor(20)); 
 
             ArrayList<Capacitor> capacitors = new ArrayList<>();
             capacitors.add(new Capacitor(0.000001)); 
@@ -27,11 +26,10 @@ public class TestDC_RC {
             // Khởi tạo danh sách tên phần tử
             ArrayList<String> elementList = new ArrayList<>();
             elementList.add("Resistor 1");
-            elementList.add("Resistor 2");
             elementList.add("Capacitor 1");
 
             // Khởi tạo EleController với các phần tử trong mạch
-            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, null, elements, 1, elementList);
+            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, null, elements, 2, elementList);
             
             // Thực hiện tính toán
             Complex equivalentImpedance = eleController.getEquivalentImpedance();

@@ -57,7 +57,7 @@ public class EleController {
         if (circuitType == 1) { // Parallel circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
-                Complex impedance = element.getImpedance(0); // DC case, frequency is 0
+                Complex impedance = element.getImpedance(Double.POSITIVE_INFINITY); // DC case, frequency is infinity
                 if (element instanceof Inductor) {
                     hasInductor = true;
                 } else if (element instanceof Capacitor) {
@@ -75,7 +75,7 @@ public class EleController {
         } else if (circuitType == 2) { // Serial circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
-                Complex impedance = element.getImpedance(0); // DC case, frequency is 0
+                Complex impedance = element.getImpedance(Double.POSITIVE_INFINITY); // DC case, frequency is infinity
                 if (element instanceof Inductor) {
                     hasInductor = true;
                 } else if (element instanceof Capacitor) {
@@ -97,18 +97,19 @@ public class EleController {
         return equivalentImpedance;
     }
 
+
     public Complex getVoltage(element element) {
         if (circuitType == 1) { // Parallel circuit
             return voltage.getVoltage(); // U = Vsource
         } else if (circuitType == 2) { // Serial circuit
-            return getCurrent(element).multiply(element.getImpedance(0)); // U = I * R
+            return getCurrent(element).multiply(element.getImpedance(Double.POSITIVE_INFINITY)); // U = I * R
         }
         return new Complex(0, 0); // Default case
     }
 
     public Complex getCurrent(element element) {
         if (circuitType == 1) { // Parallel circuit
-            Complex impedance = element.getImpedance(0);
+            Complex impedance = element.getImpedance(Double.POSITIVE_INFINITY);
             if (impedance.getReal() == Double.POSITIVE_INFINITY || impedance.getImaginary() == Double.POSITIVE_INFINITY) {
                 return new Complex(0, 0); // I = 0 for infinite impedance
             }
@@ -126,7 +127,7 @@ public class EleController {
 
     public boolean detectShortCircuit() {
         for (element element : elements) {
-            Complex impedance = element.getImpedance(0); // DC case, frequency is 0
+            Complex impedance = element.getImpedance(0); 
             if (impedance.getReal() == 0 && impedance.getImaginary() == 0 && element instanceof Inductor) {
                 return true;
             }
@@ -137,7 +138,7 @@ public class EleController {
     public void printCircuitAnalysisTable() {
         System.out.println("Element\t\t\t\tImpedance\t\t\tVoltage\t\t\tCurrent");
         for (element element : elements) {
-            Complex impedance = element.getImpedance(0); // DC case, frequency is 0
+            Complex impedance = element.getImpedance(0); 
             if (element instanceof Capacitor) {
                 impedance = new Complex(Double.POSITIVE_INFINITY, 0); // Infinite impedance for capacitors in DC
             }
