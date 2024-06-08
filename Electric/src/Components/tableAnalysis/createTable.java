@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.text.DecimalFormat;
 
 import Components.EleController;
 import Components.element;
@@ -64,22 +65,27 @@ public class createTable {
         List<String> impedanceIntensityValues = new ArrayList<>();
         List<String> voltageIntensityValues = new ArrayList<>();
         List<String> currentIntensityValues = new ArrayList<>();
+
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
-            String imString1 = String.format("%.2f", impedance.getReal());
-            String imString2 = String.format("%.2f", impedance.getImaginary());
-            String imString = imString1 + " + " + imString2 + "i";
-            impedanceIntensityValues.add(imString); // Thêm giá trị từ biến imString
+            String imString1 = Double.toString(Math.round(impedance.getReal()));
+            String imString2 = Double.toString(Math.round(impedance.getImaginary()));
+            imString1 = imString1 + " + " + imString2 + "i";
+
             Complex voltage = e.getVoltage(element, frequency);
-            String cuString1 = String.format("%.2f", voltage.getReal());
-            String cuString2 = String.format("%.2f", voltage.getImaginary());
-            String cString = cuString1 + " + " + cuString2 + "i";
+            String cuString1 = Double.toString(Math.round(voltage.getReal()));
+            String cuString2 = Double.toString(Math.round(voltage.getImaginary()));
+            cuString1 = cuString1 + " + " + cuString2 + "i";
+
             Complex current = e.getCurrent(element, frequency);
-            String donString1 = String.format("%.2f", current.getReal());
-            String donString2 = String.format("%.2f", current.getImaginary());
-            String doString = donString1 + " + " + donString2 + "i";
-            voltageIntensityValues.add(cString);
-            currentIntensityValues.add(doString);
+            String donString1 = Double.toString(Math.round(current.getReal()));
+            String donString2 = Double.toString(Math.round(current.getImaginary()));
+            donString1 = donString1 + " + " + donString2 + "i";
+
+            // Thêm giá trị vào bảng
+            impedanceIntensityValues.add(imString1); 
+            voltageIntensityValues.add(cuString1);
+            currentIntensityValues.add(donString1);
         }
         // Tạo dữ liệu mẫu
         ObservableList<Table> data = FXCollections.observableArrayList(
@@ -120,12 +126,13 @@ public class createTable {
         List<String> currentIntensityValues = new ArrayList<>();
         for (element element : elements) {
             Complex impedance = element.getImpedance(frequency);
-            String imString = Double.toString(impedance.getReal());
-            impedanceIntensityValues.add(imString); // Thêm giá trị từ biến imString
+            String imString = Double.toString(Math.round(impedance.getReal()));
             Complex voltage = e.getVoltage(element, frequency);
-            String cuString = Double.toString(voltage.getReal());
+            String cuString = Double.toString(Math.round(voltage.getReal()));
             Complex current = e.getCurrent(element, frequency);
-            String donString = Double.toString(current.getReal());
+            String donString = Double.toString(Math.round(current.getReal()));
+
+            impedanceIntensityValues.add(imString); // Thêm giá trị từ biến imString
             voltageIntensityValues.add(cuString);
             currentIntensityValues.add(donString);
         }

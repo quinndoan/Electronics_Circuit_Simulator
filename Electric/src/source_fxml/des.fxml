@@ -8,9 +8,9 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="source_fxml.DescriptionController">
    <children>
-      <ImageView fitHeight="533.0" fitWidth="776.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="533.0" fitWidth="776.0" opacity="0.22" pickOnBounds="true">
          <image>
-            <Image url="@red_white.jpg" />
+            <Image url="@white_red_circuit.jpg" />
          </image>
       </ImageView>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -24,7 +24,7 @@
                   </Label>
                   <TextFlow prefHeight="57.0" prefWidth="600.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Electronic Circuit Simulator is a powerful tool designed to assist you in the creation and analysis of electrical circuits." wrappingWidth="764.9853515625">
+                        <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Electronic Circuit Simulator is a powerful tool designed to assist you in the creation and analysis of electrical circuits." wrappingWidth="764.9853515625">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
