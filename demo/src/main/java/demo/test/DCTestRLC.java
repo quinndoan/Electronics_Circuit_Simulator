@@ -4,7 +4,7 @@ import demo.Components.Complex;
 import demo.Components.EleController;
 import demo.Components.Inductor;
 import demo.Components.Resistor;
-public class TestDC{
+public class DCTestRLC{
     public static void main(String[] args) {
         try {
             // Khởi tạo các phần tử trong mạch
