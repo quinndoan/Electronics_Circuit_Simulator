@@ -37,30 +37,30 @@ public class TestDC_R {
             elementListParallel.add("Resistor 2");
 
             // Khởi tạo EleController với các phần tử trong mạch nối tiếp
-            EleController eleControllerSeries = new EleController(5.0, "DC", resistorsSeries, null, null, elementsSeries, 2, elementListSeries);
+            EleController eleControllerSeries = new EleController(5.0, Double.POSITIVE_INFINITY, "DC", resistorsSeries, null, null, elementsSeries, 2, elementListSeries);
             
             // Khởi tạo EleController với các phần tử trong mạch song song
-            EleController eleControllerParallel = new EleController(5.0, "DC", resistorsParallel, null, null, elementsParallel, 1, elementListParallel);
+            EleController eleControllerParallel = new EleController(5.0, Double.POSITIVE_INFINITY, "DC", resistorsParallel, null, null, elementsParallel, 1, elementListParallel);
 
             // Chạy hàm getEquivalentImpedance cho mạch nối tiếp
-            Complex equivalentImpedanceSeries = eleControllerSeries.getEquivalentImpedance();
+            Complex equivalentImpedanceSeries = eleControllerSeries.getEquivalentImpedance(Double.POSITIVE_INFINITY);
             
             // In ra giá trị điện trở tương đương cho mạch nối tiếp
             System.out.println("Equivalent Impedance for Series Circuit (DC): " + equivalentImpedanceSeries);
             
             // In ra bảng phân tích mạch nối tiếp
             System.out.println("Series Circuit Analysis:");
-            eleControllerSeries.printCircuitAnalysisTable();
+            eleControllerSeries.printCircuitAnalysisTable(Double.POSITIVE_INFINITY);
 
             // Chạy hàm getEquivalentImpedance cho mạch song song
-            Complex equivalentImpedanceParallel = eleControllerParallel.getEquivalentImpedance();
+            Complex equivalentImpedanceParallel = eleControllerParallel.getEquivalentImpedance(Double.POSITIVE_INFINITY);
             
             // In ra giá trị điện trở tương đương cho mạch song song
             System.out.println("Equivalent Impedance for Parallel Circuit (DC): " + equivalentImpedanceParallel);
             
             // In ra bảng phân tích mạch song song
             System.out.println("Parallel Circuit Analysis:");
-            eleControllerParallel.printCircuitAnalysisTable();
+            eleControllerParallel.printCircuitAnalysisTable(Double.POSITIVE_INFINITY);
             
         } catch (Exception e) {
             e.printStackTrace();
