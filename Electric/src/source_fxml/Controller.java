@@ -1,11 +1,7 @@
+package source_fxml;
+
 
 import GUI_Components.*;
-import demo.Components.Capacitor;
-import demo.Components.EleController;
-import demo.Components.Inductor;
-import demo.Components.Resistor;
-import demo.Components.element;
-import demo.Components.tableAnalysis.createTable;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,6 +9,12 @@ import java.util.ResourceBundle;
 
 import javax.swing.text.html.parser.Element;
 
+import Components.Capacitor;
+import Components.EleController;
+import Components.Inductor;
+import Components.Resistor;
+import Components.element;
+import Components.tableAnalysis.createTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -183,17 +185,21 @@ public class Controller extends input implements Initializable {
                     "AC", CircuitResistor,
                     CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
             vBox.getChildren().clear();
-            vBox.getChildren().add(table.analysisTable(handleEleController));
+            vBox.getChildren().add(table.analysisTableAC(handleEleController));
 
         }
         if (voltageType == 2) {
             DC_Voltage = textField1.getText();
+            double voltage = Double.parseDouble(DC_Voltage);
             if (ElementList.size() > 0) {
                 if (circuitType == 1)
                     parallelCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
                 if (circuitType == 2)
                     serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
             }
+            EleController hanController = new EleController(voltage, "DC", CircuitResistor, CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
+            vBox.getChildren().clear();
+            vBox.getChildren().add(table.analysisTableDC(hanController));
         }
 
         circuit.getChildren().add(canvas);

@@ -14,8 +14,6 @@ public class drawParallelCircuit extends drawCircuit {
         int Distance = 80;
        
         drawVoltageSource(gc, x, y, frequency);
-        gc.fillText(voltage, x + 25, y + 55);
-        if(frequency!=null) gc.fillText(frequency, x + 25, y + 70);
         drawLine(gc, x, y);
 
         for (int i = 0; i < ElementList.size(); i++) {

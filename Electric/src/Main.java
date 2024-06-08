@@ -9,9 +9,10 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource(
+					"/source_fxml/welcome.fxml"));
 			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("source_fxml/style.css").toExternalForm());
 			primaryStage.setTitle("Electronic Circuit Simulator");
 			primaryStage.setScene(scene);
 			primaryStage.show();
