@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestDC_RC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RC",
+            "projectName": "Electronics_Circuit_Simulator_d129ef"
+        },
+        {
+            "type": "java",
             "name": "TestDC",
             "request": "launch",
             "mainClass": "test.TestDC",

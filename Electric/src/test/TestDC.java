@@ -9,8 +9,8 @@ public class TestDC{
         try {
             // Khởi tạo các phần tử trong mạch
             Resistor[] resistors = {
-                new Resistor(10), // 100 ohm resistor
-                new Resistor(20)  // 200 ohm resistor
+                new Resistor(100), // 100 ohm resistor
+                new Resistor(200)  // 200 ohm resistor
             };
             Capacitor[] capacitors = {
                 new Capacitor(0.000001) // 1 µF capacitor

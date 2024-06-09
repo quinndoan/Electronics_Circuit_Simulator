@@ -1,40 +1,59 @@
 package test;
 
+import java.util.ArrayList;
 
 import Components.Capacitor;
+import Components.complexNum.Complex;
 import Components.EleController;
 import Components.Inductor;
 import Components.Resistor;
-import Components.complexNum.Complex;
+import Components.element;
 
 public class TestAC {
     public static void main(String[] args) {
         try {
-            // Khởi tạo các phần tử trong mạch
-            Resistor[] resistors = {
-                new Resistor(100), // 100 ohm resistor
-                new Resistor(200)  // 200 ohm resistor
-            };
-            Capacitor[] capacitors = {
-                new Capacitor(0.000001) // 1 µF capacitor
-            };
-            Inductor[] inductors = {
-                new Inductor(0.001) // 1 mH inductor
-            };
+            // Define elements
+            Resistor resistor = new Resistor(100); // 100 ohms
+            Capacitor capacitor = new Capacitor(1e-6); // 1 uF
+            Inductor inductor = new Inductor(1e-3); // 1 mH
 
-            // Khởi tạo EleController với các phần tử trong mạch
-            EleController eleController = new EleController(5.0, "DC", resistors, capacitors, inductors, 2); // 2 là mạch nối tiếp
-            
-            // Chạy hàm getEquivalentImpedance với tần số cụ thể (ví dụ: 60 Hz)
-            double frequency = 60.0;
-            Complex equivalentImpedance = eleController.getEquivalentImpedance(frequency);
-            
-            // In ra giá trị điện trở tương đương
-            System.out.println("Equivalent Impedance: " + equivalentImpedance);
-            
-            // In ra bảng phân tích mạch
-            eleController.printCircuitAnalysisTable(frequency);
-            
+            // Create lists of elements
+            ArrayList<Resistor> resistors = new ArrayList<>();
+            resistors.add(resistor);
+
+            ArrayList<Capacitor> capacitors = new ArrayList<>();
+            capacitors.add(capacitor);
+
+            ArrayList<Inductor> inductors = new ArrayList<>();
+            inductors.add(inductor);
+
+            ArrayList<element> elements = new ArrayList<>();
+            elements.add(resistor);
+            elements.add(capacitor);
+            elements.add(inductor);
+
+            ArrayList<String> elementList = new ArrayList<>();
+            elementList.add("Resistor");
+            elementList.add("Capacitor");
+            elementList.add("Inductor");
+
+            // Set circuit parameters
+            double voltageValue = 10; // 10V
+            double frequency = 1000; // 1kHz
+            int circuitType = 1; // Parallel circuit
+
+            // Create EleController instance
+            EleController controller = new EleController(voltageValue, frequency, "AC", resistors, capacitors,
+                    inductors, elements, circuitType, elementList);
+
+            // Print equivalent impedance
+            Complex equivalentImpedance = controller.getEquivalentImpedance(frequency);
+            System.out.println("Equivalent Impedance: " + equivalentImpedance.getReal() + " + "
+                    + equivalentImpedance.getImaginary() + "i");
+
+            // Print circuit analysis table
+            controller.printCircuitAnalysisTable(frequency);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

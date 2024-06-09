@@ -1,6 +1,5 @@
 package source_fxml;
 
-
 import GUI_Components.*;
 
 import java.net.URL;
@@ -161,6 +160,7 @@ public class Controller extends input implements Initializable {
         ElementList.clear();
         circuitType = 0;
         voltageType = 0;
+        elements.clear();
     }
 
     @FXML
@@ -197,7 +197,8 @@ public class Controller extends input implements Initializable {
                 if (circuitType == 2)
                     serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
             }
-            EleController hanController = new EleController(voltage, "DC", CircuitResistor, CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
+            EleController hanController = new EleController(voltage, Double.POSITIVE_INFINITY, "DC", CircuitResistor,
+                    CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
             vBox.getChildren().clear();
             vBox.getChildren().add(table.analysisTableDC(hanController));
         }
