@@ -40,8 +40,6 @@ public class Controller extends input implements Initializable {
     private ArrayList<element> elements = new ArrayList<>();
     private ArrayList<String> ElementList = new ArrayList<String>(); // lưu tên thành phần cộng với số thứ tự
     @FXML
-    private GridPane grid_cell;
-    @FXML
     Canvas canvas = new Canvas(600, 400);
     @FXML
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -60,10 +58,6 @@ public class Controller extends input implements Initializable {
     public int circuitType = 0;
     public int voltageType = 0;
 
-    @FXML
-    HBox footer;
-    @FXML
-    private VBox vbox2;
     @FXML
     private TextField textField1;
     @FXML
