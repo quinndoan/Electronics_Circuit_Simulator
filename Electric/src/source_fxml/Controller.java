@@ -55,8 +55,8 @@ public class Controller extends input implements Initializable {
     private StackPane circuit;
     @FXML
     ComboBox<String> comboBoxVol = new ComboBox<>();
-    public int circuitType = 0;
-    public int voltageType = 0;
+    private int circuitType = 0;
+    private int voltageType = 0;
 
     @FXML
     private TextField textField1;
@@ -81,7 +81,7 @@ public class Controller extends input implements Initializable {
 
     // Hàm được gọi khi sự kiện chọn mục xảy ra trong ComboBox
     @FXML
-    private void handleComboBoxAction(ActionEvent event) {
+    public void handleComboBoxAction(ActionEvent event) {
         String selectedItem = comboBoxVol.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             // Ẩn tất cả các TextField trước khi hiển thị lại

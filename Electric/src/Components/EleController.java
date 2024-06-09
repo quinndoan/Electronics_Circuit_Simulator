@@ -8,13 +8,13 @@ import Components.complexNum.Complex;
 
 public class EleController {
     private List<element> elements; // them list cho element
-    public ArrayList<Resistor> resistors;
-    public ArrayList<Capacitor> capacitors;
-    public ArrayList<Inductor> inductors;
-    public VoltageSource voltage;
-    public ArrayList<String> ElementList;
+    private ArrayList<Resistor> resistors;
+    private ArrayList<Capacitor> capacitors;
+    private ArrayList<Inductor> inductors;
+    private VoltageSource voltage;
+    private ArrayList<String> ElementList;
     private int circuitType; // Thêm trường type
-    public double frequency;
+    private double frequency;
 
     public List<element> getElements() {
         return elements;

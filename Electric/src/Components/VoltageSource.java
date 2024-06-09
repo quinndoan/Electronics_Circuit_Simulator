@@ -3,8 +3,8 @@ package Components;
 import Components.complexNum.Complex;
 
 public class VoltageSource {
-	public String type;
-	public Complex uValue;
+	private String type;
+	private Complex uValue;
 
 	public String getType() {
 		return type;
