@@ -1,0 +1,83 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TestDC_RC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RC",
+            "projectName": "Electronics_Circuit_Simulator_d129ef"
+        },
+        {
+            "type": "java",
+            "name": "TestDC",
+            "request": "launch",
+            "mainClass": "test.TestDC",
+            "projectName": "Electronics_Circuit_Simulator_d129ef"
+        },
+        {
+            "type": "java",
+            "name": "TestAC",
+            "request": "launch",
+            "mainClass": "test.TestAC",
+            "projectName": "Electronics_Circuit_Simulator_d129ef"
+        },
+        {
+            "type": "java",
+            "name": "createTable",
+            "request": "launch",
+            "mainClass": "demo.Components.tableAnalysis.createTable",
+            "projectName": "Electronics_Circuit_Simulator_d129ef",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Electronics_Circuit_Simulator_d129ef",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Electronics_Circuit_Simulator_9f8d61e",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Electronics_Circuit_Simulator_a8ca2744",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Electronics_Circuit_Simulator_2333a12c",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Electronics_Circuit_Simulator_8b496e2d",
+            "vmArgs": "--module-path C:/Users/ADmin/Downloads/openjfx-22_windows-x64_bin-sdk/javafx-sdk-22/lib --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}

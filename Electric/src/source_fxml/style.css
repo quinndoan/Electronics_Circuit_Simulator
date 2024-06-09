@@ -1,0 +1,225 @@
+.button1 {
+    -fx-background-color: #C0392B;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-background-radius: 10;
+    /* Bán kính bo tròn */
+
+}
+
+.button1:hover {
+    -fx-background-color: red;
+    /* Màu nền khi di chuột qua */
+}
+
+.button1:pressed {
+    -fx-background-color: rgb(207, 10, 10);
+    /* Màu nền khi nhấn */
+}
+
+.button2 {
+    -fx-background-color: white;
+    -fx-text-fill: rgb(186, 12, 12);
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+    -fx-border-radius: 10;
+    -fx-border-color: rgb(186, 12, 12);
+    -fx-background-radius: 10;
+    -fx-border-width: 2px;
+
+}
+
+.button2:hover {
+    -fx-background-color: rgb(181, 70, 70);
+    -fx-border-radius: 10;
+    -fx-border-color: rgb(156, 67, 67);
+    -fx-border-width: 2px;
+
+    /* Màu nền khi di chuột qua */
+}
+
+.button2:pressed {
+    -fx-background-color: white;
+    /* Màu nền khi nhấn */
+}
+
+.button3 {
+    -fx-background-color: #ECECEC;
+    -fx-text-fill: black;
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: black;
+}
+
+.button3:pressed {
+    -fx-text-fill: rgb(186, 12, 12);
+    -fx-border-width: 0 0 3 0;
+    -fx-border-color: rgb(186, 12, 12);
+
+}
+
+.root {
+    -fx-background-color: #ECECEC
+}
+
+.vbox {
+    -fx-background-color: #ECECEC;
+    /* Màu nền */
+    -fx-border-color: black;
+    /* Màu viền */
+    -fx-border-width: 2px;
+    /* Độ dày viền */
+}
+
+.hbox {
+    -fx-background-color: #ECECEC;
+    /* Màu nền */
+    -fx-border-color: black;
+    /* Màu viền */
+    -fx-border-width: 2px;
+    /* Độ dày viền */
+}
+
+.hbox1 {
+    -fx-background-color: transparent;
+    /* Màu nền trong suốt */
+    -fx-border-width: 0 0 1 0;
+    /* Độ dày của viền: top right bottom left */
+    -fx-border-color: rgb(233, 9, 9);
+    /* Màu viền */
+    -fx-alignment: center;
+    /* Canh giữa theo chiều ngang */
+
+}
+
+
+.menu-bar {
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: rgb(155, 28, 28);
+    /* Đổi font chữ */
+
+    /* Độ lớn của font chữ */
+}
+
+.menu-bar .menu {
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: rgb(155, 28, 28);
+    /* Độ lớn của font chữ cho các menu */
+}
+
+.menu-bar .menu .menu-item {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgb(155, 28, 28);
+    /* Độ lớn của font chữ cho các menu item */
+}
+
+
+.label {
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+
+    -fx-padding: 10px;
+    /* Khoảng cách giữa nội dung và viền */
+}
+
+.table-view {
+    -fx-border-color: rgb(250, 165, 179);
+    /* Màu viền của bảng */
+    -fx-border-width: 0.2;
+    /* Độ dày viền của bảng */
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: rgb(186, 65, 65);
+    -fx-border-color: rgb(250, 165, 179);
+    -fx-border-width: 0.2;
+
+    /* Màu nền khi di chuột lên hàng */
+}
+
+.text-area-custom {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: rgb(186, 65, 65);
+    -fx-border-color: rgb(250, 165, 179);
+    -fx-border-width: 0.2;
+
+    /* Màu nền khi hàng được chọn */
+}
+
+.grid_cell {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.my-combobox:pressed {
+    -fx-border-color: rgb(171, 48, 48)
+}
+
+.combobox2 {
+    -fx-background-color: white;
+    /* Màu nền */
+    -fx-border-color: red;
+    /* Màu viền */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10;
+    /* Độ dày viền */
+    -fx-text-fill: red;
+    /* Màu chữ */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    /* In đậm */
+
+    /* Kích thước font chữ */
+    -fx-font-family: "Arial";
+    /* Kiểu font chữ */
+    -fx-alignment: center-left;
+    /* Căn chỉnh */
+    -fx-opacity: 1.0;
+    /* Không mờ */
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: white;
+    /* Màu nền của mỗi mục */
+    -fx-text-fill: black;
+    /* Màu chữ của mỗi mục */
+    -fx-font-size: 14px;
+    /* Kích thước font chữ của mỗi mục */
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgb(150, 150, 150);
+    /* Màu nền khi rê chuột qua mỗi mục */
+}
+
+.text-field {
+    -fx-background-color: white;
+    /* Màu nền */
+    -fx-text-fill: #333333;
+    /* Màu chữ */
+    -fx-border-color: #cccccc;
+    /* Màu viền */
+    -fx-border-width: 2px;
+    /* Độ dày viền */
+    -fx-border-radius: 5px;
+    /* Độ cong của viền */
+    -fx-padding: 5px;
+    /* Khoảng cách giữa nội dung và biên */
+    -fx-font-size: 14px;
+    /* Kích thước font chữ */
+    -fx-font-family: "Arial";
+    /* Font chữ */
+}
+
+.text-field:focused {
+    -fx-border-color: black;
+    -fx-border-width: 2px;
+    /* Màu viền khi focus */
+}

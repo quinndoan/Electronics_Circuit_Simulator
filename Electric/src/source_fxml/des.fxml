@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="source_fxml.DescriptionController">
+   <children>
+      <ImageView fitHeight="533.0" fitWidth="776.0" opacity="0.22" pickOnBounds="true">
+         <image>
+            <Image url="@white_red_circuit.jpg" />
+         </image>
+      </ImageView>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="519.0" prefWidth="702.0" spacing="10" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" prefHeight="57.0" prefWidth="391.0" text="Application Features">
+                     <font>
+                        <Font name="Arial Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <TextFlow prefHeight="57.0" prefWidth="600.0">
+                     <children>
+                        <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Electronic Circuit Simulator is a powerful tool designed to assist you in the creation and analysis of electrical circuits." wrappingWidth="764.9853515625">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextFlow prefHeight="63.0" prefWidth="600.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="With Electronic Circuit Simulator, you can easily select and place components such as resistors (R), inductors (L), capacitors (C), and power sources onto a virtual canvas. ">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextFlow prefHeight="66.0" prefWidth="600.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Once you've assembled your circuit, Electronic Circuit Simulator provides detailed analysis of the circuit's behavior, including voltage (U), current (I), and resistance (R). ">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextFlow prefHeight="50.0" prefWidth="600.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Whether you're a student, hobbyist, or professional, Circuit Builder offers an intuitive and efficient solution for circuit design and analysis.">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextFlow prefHeight="40.0" prefWidth="600.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Start building your circuits today with Circuit Builder!">
+                           <font>
+                              <Font name="Arial" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <Button mnemonicParsing="false" onAction="#pressedButton" prefHeight="31.0" prefWidth="84.0" styleClass="button2" stylesheets="@style.css" text="Next">
+                     <font>
+                        <Font name="Arial" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </center>
+         <left>
+            <Pane prefHeight="519.0" prefWidth="54.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <Pane prefHeight="519.0" prefWidth="48.0" BorderPane.alignment="CENTER" />
+         </right>
+      </BorderPane>
+   </children>
+</StackPane>
