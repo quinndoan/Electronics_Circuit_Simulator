@@ -30,11 +30,6 @@
             <artifactId>nd4j-native-platform</artifactId>
             <version>1.0.0-M1.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>15.0.1</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -58,6 +53,32 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>demo.App</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.deeplearning4j</pattern>
+                                    <shadedPattern>shadow.org.deeplearning4j</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>org.nd4j</pattern>
+                                    <shadedPattern>shadow.org.nd4j</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
