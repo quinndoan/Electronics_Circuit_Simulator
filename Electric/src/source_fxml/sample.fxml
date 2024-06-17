@@ -159,5 +159,10 @@
       </Text>
       <StackPane fx:id="circuit" layoutX="542.0" layoutY="313.0" prefHeight="200.0" prefWidth="577.0" />
       <VBox fx:id="vBox" layoutX="357.0" layoutY="552.0" prefHeight="130.0" prefWidth="837.0" />
+      <Button layoutX="1026.0" mnemonicParsing="false" onAction="#openChatbot" prefHeight="59.0" prefWidth="139.0" styleClass="button2" stylesheets="@style.css" text="ChatBot">
+         <font>
+            <Font name="Arial Bold" size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

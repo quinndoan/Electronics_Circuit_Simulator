@@ -16,7 +16,11 @@ import Components.element;
 import Components.tableAnalysis.createTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
@@ -30,6 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import drawcircuit.*;
 
 public class Controller extends input implements Initializable {
@@ -199,6 +204,31 @@ public class Controller extends input implements Initializable {
 
         circuit.getChildren().add(canvas);
 
+    }
+
+    @FXML
+    public void openChatbot(ActionEvent event) {
+        try {
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            Stage newStage = new Stage();
+
+            Parent root = FXMLLoader.load(getClass().getResource(
+                    "/source_fxml/chatbot.fxml"));
+            Scene scene = new Scene(root);
+            newStage.setTitle("OpenAI Chatbot");
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+            // Đặt Scene cho Stage mới
+            newStage.setScene(scene);
+
+            // Hiển thị cửa sổ mới
+            newStage.show();
+            currentStage.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML
