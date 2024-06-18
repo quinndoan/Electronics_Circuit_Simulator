@@ -26,12 +26,7 @@ public class WelcomeController {
     private Label descriptionLabel;
 
     @FXML
-    void e8e4e4(ActionEvent event) {
-
-    }
-
-    @FXML
-    void startToDes(ActionEvent event) {
+    public void startToDes(ActionEvent event) {
         try {
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Stage newStage = new Stage();

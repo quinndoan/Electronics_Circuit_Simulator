@@ -1,6 +1,5 @@
 package source_fxml;
 
-
 import GUI_Components.*;
 
 import java.net.URL;
@@ -41,8 +40,6 @@ public class Controller extends input implements Initializable {
     private ArrayList<element> elements = new ArrayList<>();
     private ArrayList<String> ElementList = new ArrayList<String>(); // lưu tên thành phần cộng với số thứ tự
     @FXML
-    private GridPane grid_cell;
-    @FXML
     Canvas canvas = new Canvas(600, 400);
     @FXML
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -61,10 +58,6 @@ public class Controller extends input implements Initializable {
     public int circuitType = 0;
     public int voltageType = 0;
 
-    @FXML
-    HBox footer;
-    @FXML
-    private VBox vbox2;
     @FXML
     private TextField textField1;
     @FXML
@@ -161,6 +154,7 @@ public class Controller extends input implements Initializable {
         ElementList.clear();
         circuitType = 0;
         voltageType = 0;
+        elements.clear();
     }
 
     @FXML
@@ -197,7 +191,8 @@ public class Controller extends input implements Initializable {
                 if (circuitType == 2)
                     serialCircuit.drawCircuitDiagram(gc, DC_Voltage, null, ElementList);
             }
-            EleController hanController = new EleController(voltage, "DC", CircuitResistor, CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
+            EleController hanController = new EleController(voltage, Double.POSITIVE_INFINITY, "DC", CircuitResistor,
+                    CircuitCapacitor, CircuitInductor, elements, circuitType, ElementList);
             vBox.getChildren().clear();
             vBox.getChildren().add(table.analysisTableDC(hanController));
         }
