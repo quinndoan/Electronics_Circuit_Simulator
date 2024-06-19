@@ -1,12 +1,11 @@
-package demo.test;
+package test;
 
-import java.util.ArrayList;
-
-import demo.Components.Capacitor;
-import demo.Components.Complex;
-import demo.Components.EleController;
-import demo.Components.Resistor;
-import demo.Components.element; 
+import Components.Capacitor;
+import Components.EleController;
+import Components.Resistor;
+import Components.complexNum.Complex; 
+import Components.element;
+import java.util.ArrayList; 
 
 public class TestDC_RC {
     public static void main(String[] args) {
