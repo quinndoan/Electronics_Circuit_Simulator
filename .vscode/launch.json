@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestAC",
+            "request": "launch",
+            "mainClass": "test.TestAC",
+            "projectName": "Electronics_Circuit_Simulator_2e4ce926"
+        },
+        {
+            "type": "java",
+            "name": "TestDC_R",
+            "request": "launch",
+            "mainClass": "test.TestDC_R",
+            "projectName": "Electronics_Circuit_Simulator_2e4ce926"
+        },
+        {
+            "type": "java",
+            "name": "TestDC_RC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RC",
+            "projectName": "Electronics_Circuit_Simulator_2e4ce926"
+        },
+        {
+            "type": "java",
+            "name": "TestDC_RLC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RLC",
+            "projectName": "Electronics_Circuit_Simulator_2e4ce926"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "source_fxml.Main",
