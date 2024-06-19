@@ -109,7 +109,7 @@
          <children>
             <HBox prefHeight="45.0" prefWidth="169.0" styleClass="hbox1" stylesheets="@style.css">
                <children>
-                  <ComboBox fx:id="comboBoxVol" onAction="#handleComboBoxAction" prefHeight="31.0" prefWidth="166.0" promptText="Choose Voltage" styleClass="combobox2" stylesheets="@style.css" />
+                  <ComboBox fx:id="comboBoxVol" onAction="#setVoltageType" prefHeight="31.0" prefWidth="166.0" promptText="Choose Voltage" styleClass="combobox2" stylesheets="@style.css" />
                </children>
             </HBox>
             <HBox prefHeight="45.0" prefWidth="169.0">

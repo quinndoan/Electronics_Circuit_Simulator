@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.text.DecimalFormat;
 
-import Components.Capacitor;
 import Components.EleController;
 import Components.element;
 import Components.complexNum.Complex;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TableColumn;

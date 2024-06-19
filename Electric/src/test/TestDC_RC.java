@@ -1,22 +1,18 @@
-package demo.test;
+package test;
 
 import java.util.ArrayList;
 
-import demo.Components.Capacitor;
-import demo.Components.Complex;
-import demo.Components.EleController;
-import demo.Components.Resistor;
-import demo.Components.element; 
+import Components.*;
 
 public class TestDC_RC {
     public static void main(String[] args) {
         try {
             // Khởi tạo các phần tử trong mạch
             ArrayList<Resistor> resistors = new ArrayList<>();
-            resistors.add(new Resistor(10)); 
+            resistors.add(new Resistor(10));
 
             ArrayList<Capacitor> capacitors = new ArrayList<>();
-            capacitors.add(new Capacitor(0.000001)); 
+            capacitors.add(new Capacitor(0.000001));
 
             // Tạo danh sách phần tử tổng hợp
             ArrayList<element> elements = new ArrayList<>();
@@ -29,24 +25,25 @@ public class TestDC_RC {
             elementList.add("Capacitor 1");
 
             // Khởi tạo EleController với các phần tử trong mạch
-            EleController eleController = new EleController(5.0, Double.POSITIVE_INFINITY, "DC", resistors, capacitors, null, elements, 1, elementList);
-            
+            EleController eleController = new EleController(5.0, Double.POSITIVE_INFINITY, "DC", resistors, capacitors,
+                    null, elements, 1, elementList);
+
             // Thực hiện tính toán
             Complex equivalentImpedance = eleController.getEquivalentImpedance(Double.POSITIVE_INFINITY);
-            
+
             // In ra giá trị điện trở tương đương
-            if (equivalentImpedance.getReal() == Double.POSITIVE_INFINITY || equivalentImpedance.getImaginary() == Double.POSITIVE_INFINITY) {
+            if (equivalentImpedance.getReal() == Double.POSITIVE_INFINITY
+                    || equivalentImpedance.getImaginary() == Double.POSITIVE_INFINITY) {
                 System.out.println("Equivalent Impedance for DC: Infinity");
             } else {
                 System.out.println("Equivalent Impedance for DC: " + equivalentImpedance);
             }
-            
+
             // In ra bảng phân tích mạch
             eleController.printCircuitAnalysisTable(Double.POSITIVE_INFINITY);
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-

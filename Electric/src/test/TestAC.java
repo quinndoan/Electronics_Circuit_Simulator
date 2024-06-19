@@ -2,12 +2,7 @@ package test;
 
 import java.util.ArrayList;
 
-import Components.Capacitor;
-import Components.complexNum.Complex;
-import Components.EleController;
-import Components.Inductor;
-import Components.Resistor;
-import Components.element;
+import Components.*;
 
 public class TestAC {
     public static void main(String[] args) {

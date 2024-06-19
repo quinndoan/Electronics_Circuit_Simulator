@@ -1,7 +1,4 @@
 package source_fxml;
-
-import GUI_Components.*;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -14,6 +11,8 @@ import Components.Inductor;
 import Components.Resistor;
 import Components.element;
 import Components.tableAnalysis.createTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,14 +29,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import drawcircuit.*;
 
-public class Controller extends input implements Initializable {
+public class Controller implements Initializable {
+    private int R = 0;
+    private int C = 0;
+    private int L = 0;
+    private String AC_Voltage;
+    private String AC_Frequency;
+    private String DC_Voltage;
+    private ArrayList<Resistor> CircuitResistor = new ArrayList<>();
+    private ArrayList<Inductor> CircuitInductor = new ArrayList<>();
+    private ArrayList<Capacitor> CircuitCapacitor = new ArrayList<>();
+    private ObservableList<String> list = FXCollections.observableArrayList("AC", "DC");
     private createTable table = new createTable();
     private drawParallelCircuit parallelCircuit = new drawParallelCircuit();
     private drawSerialCircuit serialCircuit = new drawSerialCircuit();
@@ -86,7 +94,7 @@ public class Controller extends input implements Initializable {
 
     // Hàm được gọi khi sự kiện chọn mục xảy ra trong ComboBox
     @FXML
-    public void handleComboBoxAction(ActionEvent event) {
+    public void setVoltageType(ActionEvent event) {
         String selectedItem = comboBoxVol.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             // Ẩn tất cả các TextField trước khi hiển thị lại
