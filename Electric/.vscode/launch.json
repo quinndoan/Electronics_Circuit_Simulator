@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestAC",
+            "request": "launch",
+            "mainClass": "test.TestAC",
+            "projectName": "Electric_7d757c06"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main",

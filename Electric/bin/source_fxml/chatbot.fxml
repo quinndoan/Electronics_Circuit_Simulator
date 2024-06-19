@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="source_fxml.ChatBotController" style="-fx-background-color: #ffe6e6; -fx-padding: 20;">
+    <TextArea fx:id="chatArea" prefHeight="400" prefWidth="600" editable="false" wrapText="true" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: #ffffff; -fx-border-color: #ff9999; -fx-border-radius: 5;"/>
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="userInput" prefWidth="500" promptText="Nhập tin nhắn của bạn..." style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: #ffffff; -fx-border-color: #ff9999; -fx-border-radius: 5;"/>
+        <Button text="Gửi" onAction="#sendMessage" style="-fx-font-size: 14px; -fx-padding: 10 20; -fx-background-color: #ff4d4d; -fx-text-fill: white; -fx-background-radius: 5;"/>
+    </HBox>
+</VBox>

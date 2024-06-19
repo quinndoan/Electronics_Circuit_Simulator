@@ -8,6 +8,13 @@
             "type": "java",
             "name": "TestAC",
             "request": "launch",
+            "mainClass": "TestAC",
+            "projectName": "Electronics_Circuit_Simulator_2e4ce926"
+        },
+        {
+            "type": "java",
+            "name": "TestAC",
+            "request": "launch",
             "mainClass": "test.TestAC",
             "projectName": "Electronics_Circuit_Simulator_2e4ce926"
         },
