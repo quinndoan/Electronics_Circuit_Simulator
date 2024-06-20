@@ -1,8 +1,9 @@
 package Components;
 
-import Components.complexNum.Complex;
 import java.util.ArrayList;
 import java.util.List;
+
+import Components.ComplexNum.Complex;
 
 public class EleController {
     private List<element> elements;

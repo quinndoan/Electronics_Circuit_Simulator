@@ -3,8 +3,9 @@ import Components.Capacitor;
 import Components.EleController;
 import Components.Inductor;
 import Components.Resistor;
-import Components.complexNum.Complex;
 import Components.element;
+import Components.ComplexNum.Complex;
+
 import java.util.ArrayList;
 
 public class TestAC {

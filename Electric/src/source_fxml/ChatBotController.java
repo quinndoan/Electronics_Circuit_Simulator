@@ -1,4 +1,4 @@
-package source_fxml;
+package Source_fxml;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

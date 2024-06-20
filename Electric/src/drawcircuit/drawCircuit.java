@@ -1,4 +1,4 @@
-package drawcircuit;
+package DrawCircuit;
 
 import java.util.ArrayList;
 

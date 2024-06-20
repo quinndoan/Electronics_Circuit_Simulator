@@ -1,6 +1,6 @@
 package Components;
 
-import Components.complexNum.Complex;
+import Components.ComplexNum.Complex;
 
 public abstract class element {
 	protected double value;

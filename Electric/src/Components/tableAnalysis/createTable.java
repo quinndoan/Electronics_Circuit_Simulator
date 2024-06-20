@@ -1,4 +1,4 @@
-package Components.tableAnalysis;
+package Components.TableAnalysis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 import Components.EleController;
 import Components.element;
-import Components.complexNum.Complex;
+import Components.ComplexNum.Complex;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

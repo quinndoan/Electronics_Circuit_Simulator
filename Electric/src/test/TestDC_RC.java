@@ -3,10 +3,10 @@ package test;
 import java.util.ArrayList;
 
 import Components.Capacitor;
-import Components.complexNum.Complex;
 import Components.EleController;
 import Components.Resistor;
-import Components.element; 
+import Components.element;
+import Components.ComplexNum.Complex; 
 
 public class TestDC_RC {
     public static void main(String[] args) {

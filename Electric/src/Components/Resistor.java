@@ -1,6 +1,6 @@
 package Components;
 
-import Components.complexNum.Complex;
+import Components.ComplexNum.Complex;
 
 public class Resistor extends element {
     public Resistor(double resistance) {

@@ -1,4 +1,4 @@
-package source_fxml;
+package Source_fxml;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -10,7 +10,8 @@ import Components.EleController;
 import Components.Inductor;
 import Components.Resistor;
 import Components.element;
-import Components.tableAnalysis.createTable;
+import Components.TableAnalysis.createTable;
+import DrawCircuit.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +34,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import drawcircuit.*;
 
 public class Controller implements Initializable {
     private int R = 0;
