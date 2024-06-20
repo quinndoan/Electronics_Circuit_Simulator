@@ -1,17 +1,17 @@
 package Components;
 
-import Components.complexNum.Complex; 
+import Components.complexNum.Complex;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EleController {
-    private List<element> elements; 
+    private List<element> elements;
     public ArrayList<Resistor> resistors;
     public ArrayList<Capacitor> capacitors;
     public ArrayList<Inductor> inductors;
     public VoltageSource voltage;
     public ArrayList<String> ElementList;
-    private int circuitType; 
+    private int circuitType;
     public double frequency;
 
     public List<element> getElements() {
@@ -23,17 +23,17 @@ public class EleController {
     }
 
     public EleController(double uValue, double frequency, String voltageType, ArrayList<Resistor> resistors,
-    ArrayList<Capacitor> capacitors, ArrayList<Inductor> inductors, ArrayList<element> Elements,
-    int circuitType, ArrayList<String> ElementList) {
-    this.voltage = new VoltageSource(voltageType, new Complex(uValue, 0));
-    this.resistors = resistors;
-    this.capacitors = capacitors;
-    this.inductors = inductors;
-    this.elements = Elements != null ? Elements : new ArrayList<>();
-    this.circuitType = circuitType;
-    this.ElementList = ElementList;
-    this.frequency = frequency;
-}
+            ArrayList<Capacitor> capacitors, ArrayList<Inductor> inductors, ArrayList<element> Elements,
+            int circuitType, ArrayList<String> ElementList) {
+        this.voltage = new VoltageSource(voltageType, new Complex(uValue, 0));
+        this.resistors = resistors;
+        this.capacitors = capacitors;
+        this.inductors = inductors;
+        this.elements = Elements != null ? Elements : new ArrayList<>();
+        this.circuitType = circuitType;
+        this.ElementList = ElementList;
+        this.frequency = frequency;
+    }
 
     public double getFrequency() {
         return frequency;
@@ -41,7 +41,7 @@ public class EleController {
 
     public Complex getEquivalentImpedance(double frequency) throws Exception {
         Complex equivalentImpedance;
-    
+
         if (circuitType == 1) { // Parallel circuit
             equivalentImpedance = new Complex(0, 0);
             for (element element : elements) {
@@ -52,7 +52,8 @@ public class EleController {
                 if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
                     impedance = new Complex(Double.POSITIVE_INFINITY, 0); // Infinite impedance for capacitors in DC
                 }
-                if (impedance.getReal() == Double.POSITIVE_INFINITY || impedance.getImaginary() == Double.POSITIVE_INFINITY) {
+                if (impedance.getReal() == Double.POSITIVE_INFINITY
+                        || impedance.getImaginary() == Double.POSITIVE_INFINITY) {
                     continue; // Skip adding infinity impedances
                 }
                 equivalentImpedance = equivalentImpedance.add(impedance.inverse());
@@ -73,10 +74,10 @@ public class EleController {
         } else {
             throw new IllegalArgumentException("Invalid circuit type");
         }
-    
+
         return equivalentImpedance;
     }
-    
+
     public Complex getVoltage(element element, double frequency) {
         if (circuitType == 1) { // Parallel circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
@@ -91,7 +92,7 @@ public class EleController {
         }
         return new Complex(0, 0); // Default case
     }
-    
+
     public Complex getCurrent(element element, double frequency) {
         if (circuitType == 1) { // Parallel circuit
             if (element instanceof Capacitor && frequency == Double.POSITIVE_INFINITY) {
@@ -110,6 +111,15 @@ public class EleController {
             }
         }
         return new Complex(0, 0); // Default case
+    }
+
+    public boolean detectShortCircuit(double frequency) {
+        for (element element : elements) {
+            if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void printCircuitAnalysisTable(double frequency) {
