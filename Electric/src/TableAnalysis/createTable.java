@@ -1,4 +1,4 @@
-package Components.TableAnalysis;
+package TableAnalysis;
 
 import java.util.ArrayList;
 import java.util.HashMap;

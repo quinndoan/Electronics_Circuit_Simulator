@@ -2,16 +2,13 @@ package Source_fxml;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javax.swing.text.html.parser.Element;
-
 import Components.Capacitor;
 import Components.EleController;
 import Components.Inductor;
 import Components.Resistor;
 import Components.element;
-import Components.TableAnalysis.createTable;
 import DrawCircuit.*;
+import TableAnalysis.createTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
