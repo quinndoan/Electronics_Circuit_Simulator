@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TestDC_RLC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RLC",
+            "projectName": "Electric_7d757c06"
+        },
+        {
+            "type": "java",
+            "name": "TestDC_RC",
+            "request": "launch",
+            "mainClass": "test.TestDC_RC",
+            "projectName": "Electric_7d757c06"
+        },
+        {
+            "type": "java",
             "name": "TestAC",
             "request": "launch",
             "mainClass": "test.TestAC",
