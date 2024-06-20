@@ -14,6 +14,5 @@ public class VoltageSource {
 	public Complex getVoltage() {
 		return uValue;
 	}
-	// trường hợp là nguồn DC thì lấy phần real làm giá trị Voltage
-	// và phần ảo để là 0i
+
 }

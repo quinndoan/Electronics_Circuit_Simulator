@@ -1,17 +1,17 @@
 package Components;
 
-import Components.complexNum.Complex; // Import lớp ArrayList
+import Components.complexNum.Complex; 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EleController {
-    private List<element> elements; // them list cho element
+    private List<element> elements; 
     public ArrayList<Resistor> resistors;
     public ArrayList<Capacitor> capacitors;
     public ArrayList<Inductor> inductors;
     public VoltageSource voltage;
     public ArrayList<String> ElementList;
-    private int circuitType; // Thêm trường type
+    private int circuitType; 
     public double frequency;
 
     public List<element> getElements() {
@@ -110,17 +110,6 @@ public class EleController {
             }
         }
         return new Complex(0, 0); // Default case
-    }
-    
-    
-
-    public boolean detectShortCircuit(double frequency) {
-        for (element element : elements) {
-            if (element.getImpedance(frequency).getReal() == 0 && element.getImpedance(frequency).getImaginary() == 0) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void printCircuitAnalysisTable(double frequency) {
