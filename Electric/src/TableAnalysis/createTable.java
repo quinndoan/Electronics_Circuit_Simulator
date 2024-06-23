@@ -18,7 +18,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class createTable {
-
     public static class Table {
         private final Map<String, SimpleStringProperty> properties = new HashMap<>();
 

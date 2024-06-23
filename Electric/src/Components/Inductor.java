@@ -3,6 +3,7 @@ package Components;
 import Components.ComplexNum.Complex;
 
 public class Inductor extends element {
+    public Complex complex;
     public Inductor(double inductance) {
         super(inductance);
     }

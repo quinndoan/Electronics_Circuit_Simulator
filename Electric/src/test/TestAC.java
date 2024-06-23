@@ -1,4 +1,4 @@
-package test;
+package Test;
 import Components.Capacitor;
 import Components.EleController;
 import Components.Inductor;
